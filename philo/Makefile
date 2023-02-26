@@ -6,7 +6,7 @@
 #    By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 23:10:38 by ciclo             #+#    #+#              #
-#    Updated: 2023/02/26 10:51:38 by ciclo            ###   ########.fr        #
+#    Updated: 2023/02/26 10:54:47 by ciclo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ $(NAME): $(OBJ_DIR) $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(FLAGS) -c $< -o $@
+	@echo "$@ done compile"
 
 $(OBJ_DIR):
 	@mkdir -p $@
