@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/02/27 18:01:32 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/02/27 18:07:01 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	help_msg(void)
 {
-	printf (MAGENTA"Usage:	 ./philosofers number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n"RESET);
-	printf (MAGENTA"Example: ./philosofers 5 800 200 200\n"RESET);
+	printf (BLUE"Philosophers: opcion help -> flag: [--help] [-h]\n"RESET);
+	printf ("Usage:	 ./philosofers number_of_philosophers time_to_die time_to_eat \
+	time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
+	printf ("Example: ./philosofers 5 800 200 200\n");
 	exit (EXIT_SUCCESS);
 }
 
