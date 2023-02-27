@@ -6,7 +6,7 @@
 #    By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 23:10:38 by ciclo             #+#    #+#              #
-#    Updated: 2023/02/27 13:48:58 by ciclo            ###   ########.fr        #
+#    Updated: 2023/02/27 16:27:11 by ciclo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ R			:= rm -rf
 OBJ_DIR		:= obj/
 SRC_DIR		:= src/
 
-SRC_FILES	:= philosofers utils
+SRC_FILES	:= philosofers utils parser
 
 SRC			:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -27,13 +27,13 @@ OBJ			:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 all: $(NAME) $(OBJ)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(FLAGS) $(SRC) -o $@
+	$(CC) $(FLAGS) $(OBJ_DIR)* -o $@
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	@$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 $(OBJ_DIR):
-	@mkdir -p $@
+	mkdir -p $@
 
 clean:
 	@$(R) $(NAME)
