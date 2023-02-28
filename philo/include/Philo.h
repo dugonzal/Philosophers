@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Philosophers.h                                     :+:      :+:    :+:   */
+/*   Philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/02/28 12:06:10 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/02/28 12:12:41 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <sys/time.h>
-// colores para la impresion
+
 #define BLACK "\033[0;30m"
 #define RED "\033[0;31m"
 #define GREEN "\033[0;32m"
@@ -27,10 +27,11 @@
 #define BLUE "\033[0;34m"
 #define MAGENTA "\033[0;35m"
 #define CYAN "\033[0;36m"
-#define WHITE "\033[0;37m"
 #define RESET "\033[0m"
+
 typedef struct s_philo
 {
+	pthread_t	thread; // hilo del filosofo
 	int			id; // id del filosofo
 	int			left_fork; // id del tenedor izquierdo
 	int			right_fork; // id del tenedor derecho
@@ -39,7 +40,6 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	pthread_t	thread; // hilo del filosofo
 	int			philo_num;	// numero de filosofos
 	int			time_to_die; // tiempo que muere
 	int			time_to_eat; // tiempo que come

@@ -1,0 +1,16 @@
+{
+	"configurations": [
+	{
+		"type": "lldb",
+		"request": "custom",
+		"name": "Custom launch",
+		"targetCreateCommands": [
+			"target create ${workspaceFolder}/philo/philosofers"
+		],
+		"processCreateCommands": [
+			"settings set target.run-args value1 value2 value3",
+			"process launch"
+		]
+	}
+	]
+}
