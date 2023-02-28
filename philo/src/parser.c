@@ -6,26 +6,28 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/02/27 18:13:20 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/02/28 12:06:48 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Philosophers.h"
+#include "../include/Philo.h"
 
 void	help_msg(void)
 {
 	printf (BLUE"Philosophers: opcion help -> flag: [--help] [-h]\n\n"RESET);
 	printf ("Usage:	 ./philosofers number_of_philosophers time_to_die time_to_eat \
 	time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
-	printf ("Uso:	 ./filosofers numero_de_filosofos tiempo_para_morir \
-	tiempo_para_comer tiempo_para_dormir [numero_de_veces_que_cada_filosofo_debe_comer]\n");
+	printf ("Uso:	 ./filosofers numero_de_filosofos tiempo_antes_de_comer \
+	tiempo_para_comer tiempo_para_dormir \
+	[numero_de_veces_que_cada_filosofo_debe_comer]\n");
 	printf ("Example: ./philosofers 5 800 200 200 [5]\n");
 	exit (EXIT_SUCCESS);
 }
 
 void	parser(int ac, char **av, t_data *data)
 {
-	if (ft_strcmp(av[1], "-h") == 0 || ft_strcmp(av[1], "--help") == 0)
+	if ((ac > 1 && ft_strcmp(av[1], "-h") == 0) || \
+	(ac > 1 && ft_strcmp(av[1], "--help") == 0))
 		help_msg();
 	if (ac < 5 || ac > 6)
 		error (RED"Error: argumentos invalidos\n"RESET);
