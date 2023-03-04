@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/02/28 12:12:41 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/03 19:12:23 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data
 	t_philo		*philo;
 }	t_data;
 
+int		is_digit(int *str);
 int		ft_atoi(const char *str);
 void	parser(int ac, char **av, t_data *data);
 void	error(char *s);

@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/02/28 14:25:04 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/03 20:39:01 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,20 @@ pthread_mutex_lock -> bloquea el mutex
 pthread_mutex_unlock -> desbloquea el mutex
 */
 
-void	*filosopher(void *arg)
+void	*filosopher_rutine(void *arg)
 {
 	t_philo	*philo;
 
-	philo =  (t_philo *)arg;
-	//while (42)
-		printf("filosofo #: -> [%d]\n", philo->id);
+	philo = ((t_philo *)arg);
+	while (43)
+	{
+		printf (GREEN"philo exist xd: -> {%d}\n"RESET, philo->id);
+		sleep (1);
+	}
+
 	return (NULL);
 }
+
 
 void create_threads(t_data *data)
 {
@@ -44,9 +49,15 @@ void create_threads(t_data *data)
 	i = -1;
 	while (++i < data->philo_num)
 	{
+		pthread_create(&data->philo[i].thread, NULL, &filosopher_rutine, &data->philo[i]);
 		data->philo[i].id = i;
-		pthread_create(&data->philo[i].thread, NULL, &filosopher, &data->philo[i]);
 	}
+}
+
+void	monitoring(t_data *data)
+{
+	int i;
+
 	i = -1;
 	while (++i < data->philo_num)
 		pthread_join(data->philo[i].thread, NULL);
@@ -62,5 +73,6 @@ int	main(int ac, char **av)
 	memset(data, 0, sizeof(t_data));
 	parser(ac, av, data);
 	create_threads(data);
+	monitoring (data);
 	exit (EXIT_SUCCESS);
 }

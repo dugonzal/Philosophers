@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:57:44 by ciclo             #+#    #+#             */
-/*   Updated: 2023/02/28 12:06:40 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/03 19:27:03 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	ft_atoi(const char *str)
 
 	while (*str == 32 || (*str > 8 && *str < 14))
 		str++;
-	if (*str == '-')
+	if (*str == 45)
 	{
 		printf (RED"Error: no puede ser negativo\n"RESET);
 		exit (-1);
 	}
-	if (*str == 45)
+	if (*str ==  43)
 		str++;
 	nbr = 0;
 	while (*str > 47 && *str < 58)
