@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/02/28 12:06:48 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/03 20:27:28 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,33 @@ void	help_msg(void)
 	exit (EXIT_SUCCESS);
 }
 
+static void	check_number(char **av)
+{
+	int i;
+	int j;
+
+	i = 1;
+	while (av[i])
+	{
+		j = 0;
+		while (av[i][j])
+		{
+			if ((av[i][j] < 48) || (av[i][j] > 58))
+				error (RED"Error: -> no es un numero"RESET);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	parser(int ac, char **av, t_data *data)
 {
 	if ((ac > 1 && ft_strcmp(av[1], "-h") == 0) || \
 	(ac > 1 && ft_strcmp(av[1], "--help") == 0))
 		help_msg();
 	if (ac < 5 || ac > 6)
-		error (RED"Error: argumentos invalidos\n"RESET);
+		error (RED"Error: -> argumentos invalidos\n"RESET);
+	check_number (av);
 	data->philo_num = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
@@ -39,6 +59,6 @@ void	parser(int ac, char **av, t_data *data)
 		data->must_eat = ft_atoi(av[5]);
 	data->philo = malloc(sizeof(t_philo) * data->philo_num);
 	if (!data->philo)
-		error(RED"Error: malloc failed\n"RESET);
+		error(RED"Error: -> malloc failed\n"RESET);
 	memset(data->philo, 0, sizeof(t_philo) * data->philo_num);
 }
