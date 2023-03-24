@@ -18,7 +18,8 @@
 /*
 philosofers.c:
 se trata de implementar una solución para el problema de los filósofos que
-intentan comer de un plato y necesitan dos tenedores para hacerlo.
+intentan comer de un bol de espaguetis necesitan dos tenedores para hacerlo
+y cada filosofo solo tiene uno.
 
 pthread_create -> crea un hilo nuevo para cada filosofo
 pthread_join -> espera a que el hilo termine
@@ -40,7 +41,6 @@ void	*filosopher_rutine(void *arg)
 
 	return (NULL);
 }
-
 
 void create_threads(t_data *data)
 {
@@ -67,7 +67,7 @@ int	main(int ac, char **av)
 {
 	t_data	*data;
 
-	data = malloc(sizeof(t_data));
+	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		error(RED"Error: malloc failed\n"RESET);
 	memset(data, 0, sizeof(t_data));

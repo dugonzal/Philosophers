@@ -35,7 +35,7 @@ static void	check_number(char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if ((av[i][j] < 48) || (av[i][j] > 58))
+			if (ft_isdigit(av[i][j]))
 				error (RED"Error: -> no es un numero"RESET);
 			j++;
 		}
