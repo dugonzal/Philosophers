@@ -50,3 +50,13 @@ fclean: clean
 	@$(R) $(OBJ_DIR)
 
 re: fclean all
+
+val: all
+	valgrind --leak-check=full \
+         --show-leak-kinds=all \
+         --track-origins=yes \
+         --verbose \
+         --log-file=valgrind-out.txt \
+				 ./$(NAME) 5 800 200 200
+
+.PHONY: all clean fclean re asm rm-asm norm
