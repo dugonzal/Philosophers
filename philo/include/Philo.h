@@ -48,7 +48,7 @@ typedef struct s_data
 	t_philo		*philo;
 }	t_data;
 
-int		is_digit(int *str);
+int		ft_isdigit(int str);
 int		ft_atoi(const char *str);
 void	parser(int ac, char **av, t_data *data);
 void	error(char *s);
