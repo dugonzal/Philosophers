@@ -36,6 +36,11 @@ int	ft_atoi(const char *str)
 	return ((int)nbr);
 }
 
+int ft_isdigit(int c)
+{
+  return (c < 48 || c > 58);
+}
+
 int	ft_strlen(char *str)
 {
 	int	i;
