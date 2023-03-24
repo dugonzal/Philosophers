@@ -36,6 +36,7 @@ typedef struct s_philo
 	int			left_fork; // id del tenedor izquierdo
 	int			right_fork; // id del tenedor derecho
 	int			eat_count; // numero de veces que ha comido
+  struct t_data *data; // estructura general del programa
 }t_philo;
 
 typedef struct s_data
@@ -44,8 +45,10 @@ typedef struct s_data
 	int			time_to_die; // tiempo que muere
 	int			time_to_eat; // tiempo que come
 	int			time_to_sleep; // tiempo que duerme
+  int     time_to_thinking; // tiempo que piensa
 	int			must_eat; // -1 si no se pasa como argumento
-	t_philo		*philo;
+  t_philo		*philo;
+	pthread_mutex_t	forks[]; // array de mutex para los tenedores
 }	t_data;
 
 int		ft_isdigit(int str);

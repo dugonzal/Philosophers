@@ -26,6 +26,7 @@ pthread_join -> espera a que el hilo termine
 pthread_mutex_init -> inicializa el mutex
 pthread_mutex_lock -> bloquea el mutex
 pthread_mutex_unlock -> desbloquea el mutex
+pthread_mutex_destroy -> destruye el mutex
 */
 
 void	*filosopher_rutine(void *arg)
@@ -41,6 +42,7 @@ void	*filosopher_rutine(void *arg)
 
 	return (NULL);
 }
+
 
 void create_threads(t_data *data)
 {
@@ -63,6 +65,22 @@ void	monitoring(t_data *data)
 		pthread_join(data->philo[i].thread, NULL);
 }
 
+
+/*
+ *inicializacion de los mutex mientras i sea menor o igual que el numero de filosofos
+ , 
+ * */
+
+void  mutex_init(t_data *data)
+{
+  int i;
+
+  i = data->philo_num;
+  while (i-- <=  data->philo_num)
+  {
+    pthread_mutex_init(&data->forks[i], NULL);
+  }
+}
 int	main(int ac, char **av)
 {
 	t_data	*data;
@@ -73,6 +91,7 @@ int	main(int ac, char **av)
 	memset(data, 0, sizeof(t_data));
 	parser(ac, av, data);
 	create_threads(data);
+  mutex_init (data);
 	monitoring (data);
 	exit (EXIT_SUCCESS);
 }
