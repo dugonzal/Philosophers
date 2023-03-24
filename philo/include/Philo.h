@@ -49,7 +49,7 @@ typedef struct s_data
 	int			must_eat; // -1 si no se pasa como argumento
   t_philo		*philo;
 	pthread_mutex_t	forks[]; // array de mutex para los tenedores
-}	t_data;
+  }	t_data;
 
 int		ft_isdigit(int str);
 int		ft_atoi(const char *str);
