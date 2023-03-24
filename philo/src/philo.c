@@ -34,10 +34,10 @@ void	*philo_rutine(void *arg)
 	t_philo	*philo;
 
 	philo = ((t_philo *)arg);
-	while (43)
+//	while (43)
 	{
 		printf (GREEN"philo exist xd: -> {%d}\n"RESET, philo->id);
-		sleep (1);
+//		sleep (1);
 	}
 	return (NULL);
 }
@@ -47,11 +47,11 @@ void create_threads(t_data *data)
 {
 	int i;
 
-	i = -1;
-	while (++i < data->philo_num)
+	i = 0;
+	while (i++ < data->philo_num)
 	{
 		pthread_create(&data->philo[i].thread, NULL, &philo_rutine, &data->philo[i]);
-		data->philo[i].id = i;
+		printf ("hilo -<[%d]\n", data->philo[i].id = i);
 	}
 }
 
@@ -59,8 +59,8 @@ void	monitoring(t_data *data)
 {
 	int i;
 
-	i = -1;
-	while (++i < data->philo_num)
+	i = 0;
+	while (i++ <= data->philo_num)
 		pthread_join(data->philo[i].thread, NULL);
 }
 
@@ -69,17 +69,22 @@ void	monitoring(t_data *data)
  *inicializacion de los mutex mientras i sea menor o igual que el numero de filosofos
 :
  * */
-void  mutex_init(t_data *data)
+int  mutex_init(t_data *data)
 {
-  int i;
+  int error;
+  int i;  
 
-  i = data->philo_num;
-    printf ("%d", i);
-  while (i-- <= data->philo_num)
+  i = 0;
+  error = 0;
+  while (i++ < data->philo_num)
   {
-    if (!(pthread_mutex_init(&data->forks[i], NULL)))
-      break;
+    printf ("muxex -> [%d]\n", i); 
+     error =  pthread_mutex_init(&data->forks[i], NULL);
+     if (error != 0)
+        printf ("no se pudo crear el mutex fork[%d]\n", error);
   }
+  printf ("!sale");
+  return (0);
 }
 
 int	main(int ac, char **av)
@@ -92,7 +97,8 @@ int	main(int ac, char **av)
 	memset(data, 0, sizeof(t_data));
 	parser(ac, av, data);
 	create_threads(data);
-  mutex_init (data);
-	monitoring (data);
+  if (mutex_init (data) == 0)
+    printf ("sale en 0 con los tenedore creados");
+//	monitoring (data);
 	exit (EXIT_SUCCESS);
 }
