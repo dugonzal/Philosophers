@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:= philosofers
+NAME		:= philo
 
 CC			:= clang -g3
 FLAGS		:= -Wall -Werror -Wextra
@@ -24,16 +24,14 @@ SRC_FILES	:= philosofers utils parser
 SRC			:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
-all: $(NAME) $(OBJ)
+all: $(NAME) 
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@$(CC) $(FLAGS) -lpthread $(OBJ_DIR)* -o $@
+$(NAME): $(OBJ)
+	$(CC) $(FLAGS) -lpthread $(OBJ) -o $@
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	@$(CC) $(FLAGS) -c $< -o $@
-
-$(OBJ_DIR):
-	@mkdir -p $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	mkdir -p $(OBJ_DIR)
+	$(CC) $(FLAGS) -c $< -o $@
 
 asm:
 	@mkdir -p asm
