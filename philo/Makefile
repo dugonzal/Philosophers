@@ -19,7 +19,7 @@ R			:= rm -rf
 OBJ_DIR		:= obj/
 SRC_DIR		:= src/
 
-SRC_FILES	:= philosofers utils parser
+SRC_FILES	:= philo utils parser
 
 SRC			:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
