@@ -17,7 +17,7 @@
 
 /*
 philosofers.c:
-se trata de implementar una solución para el problema de los filósofos que
+se trata de implementar una solución, para el problema de los filósofos que
 intentan comer de un bol de espaguetis necesitan dos tenedores para hacerlo
 y cada filosofo solo tiene uno.
 
@@ -29,7 +29,7 @@ pthread_mutex_unlock -> desbloquea el mutex
 pthread_mutex_destroy -> destruye el mutex
 */
 
-void	*filosopher_rutine(void *arg)
+void	*philo_rutine(void *arg)
 {
 	t_philo	*philo;
 
@@ -39,7 +39,6 @@ void	*filosopher_rutine(void *arg)
 		printf (GREEN"philo exist xd: -> {%d}\n"RESET, philo->id);
 		sleep (1);
 	}
-
 	return (NULL);
 }
 
@@ -51,7 +50,7 @@ void create_threads(t_data *data)
 	i = -1;
 	while (++i < data->philo_num)
 	{
-		pthread_create(&data->philo[i].thread, NULL, &filosopher_rutine, &data->philo[i]);
+		pthread_create(&data->philo[i].thread, NULL, &philo_rutine, &data->philo[i]);
 		data->philo[i].id = i;
 	}
 }
@@ -68,19 +67,21 @@ void	monitoring(t_data *data)
 
 /*
  *inicializacion de los mutex mientras i sea menor o igual que el numero de filosofos
- , 
+:
  * */
-
 void  mutex_init(t_data *data)
 {
   int i;
 
   i = data->philo_num;
-  while (i-- <=  data->philo_num)
+    printf ("%d", i);
+  while (i-- <= data->philo_num)
   {
-    pthread_mutex_init(&data->forks[i], NULL);
+    if (!(pthread_mutex_init(&data->forks[i], NULL)))
+      break;
   }
 }
+
 int	main(int ac, char **av)
 {
 	t_data	*data;
