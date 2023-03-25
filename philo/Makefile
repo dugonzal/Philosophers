@@ -24,6 +24,10 @@ SRC_FILES	:= philo utils parser
 SRC			:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 
+ifndef verbose
+.SILENT:
+endif
+
 all: $(NAME) 
 
 $(NAME): $(OBJ)
@@ -34,20 +38,20 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(FLAGS) -c $< -o $@
 
 asm:
-	@mkdir -p asm
-	@$(CC) $(FLAGS) $(SRC_DIR)* -S
-	@mv *.s asm
+	mkdir -p asm
+	$(CC) $(FLAGS) $(SRC_DIR)* -S
+	mv *.s asm
 
 rm-asm:
 	$(R) asm
 
 norm:
-	@norminette $(SRC_DIR)*.c $(SRC_DIR)*.h
+	norminette $(SRC_DIR)*.c $(SRC_DIR)*.h
 clean:
-	@$(R) $(NAME)
+	$(R) $(NAME)
 
 fclean: clean
-	@$(R) $(OBJ_DIR)
+	$(R) $(OBJ_DIR)
 
 re: fclean all
 
