@@ -29,15 +29,6 @@
 #define CYAN "\033[0;36m"
 #define RESET "\033[0m"
 
-typedef struct s_philo
-{
-	pthread_t	thread; // hilo del filosofo
-	int			id; // id del filosofo
-	int			left_fork; // id del tenedor izquierdo
-	int			right_fork; // id del tenedor derecho
-	int			eat_count; // numero de veces que ha comido
-  struct t_data *data; // estructura general del programa
-}t_philo;
 
 typedef struct s_data
 {
@@ -47,15 +38,24 @@ typedef struct s_data
 	int			time_to_sleep; // tiempo que duerme
   int     time_to_thinking; // tiempo que piensa
 	int			must_eat; // -1 si no se pasa como argumento
-  t_philo		*philo;
-	pthread_mutex_t	forks[]; // array de mutex para los tenedores
+	pthread_t	*thread; // hilo del filosofo
+	pthread_mutex_t	*forks; // array de mutex de los tenedores
   }	t_data;
+
+typedef struct s_philo
+{
+	int			id; // id del filosofo
+	int			left_fork; // id del (tenedor o mutex) izquierdo
+	int			right_fork; // id del (tenedor o mutex) derecho
+	int			eat_count; // numero de veces que ha comido
+  t_data *data; // estructura general del programa
+}t_philo;
 
 int		ft_isdigit(int str);
 int		ft_atoi(const char *str);
-void	parser(int ac, char **av, t_data *data);
+void 	parser(int ac, char **av, t_data *data);
 void	error(char *s);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
-
+void init(t_data *data, t_philo *philo);
 #endif

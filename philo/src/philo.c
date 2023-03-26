@@ -11,133 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/Philo.h"
-
-// teseting programing
-// ./filosofers 5 500 300 200 10
-
 /*
-philosofers.c:
-se trata de implementar una solución, para el problema de los filósofos que
-intentan comer de un bol de espaguetis necesitan dos tenedores para hacerlo
-y cada filosofo solo tiene uno.
-
-pthread_create -> crea un hilo nuevo para cada filosofo
-pthread_mutex_init -> inicializa el mutex
-pthread_mutex_lock -> bloquea el mutex
-philo_rutine ->  la rutina del filosofo, lo que aun no veo es que nececesita dos mutex para hacer su rutina
-pthread_mutex_unlock -> desbloquea el mutex
-pthread_join -> espera a que el hilo termine
-pthread_mutex_destroy -> destruye el mutex
-*/
-/*
-void	*philo_rutine(void *arg)
-{
-	t_philo	*philo;
-
-	philo = ((t_philo *)arg);
- //pthread_mutex_lock (&philo->data->forks[0]);
-  //	while (43)
-	{
-		printf (GREEN"philo exist xd: -> {%d}\n"RESET, philo->id);
-//		sleep (1);
- //pthread_mutex_unlock(&philo->data->forks[0]);
-  //	while (43)
-	}
-	return (NULL);
-}
-
-
-void create_threads(t_data *data)
-{
-	int i;
-  int error;
-
-  i = 0;
-  error = 0;
-	while (i++ < data->philo_num)
-	{
-		data->philo[i].id = i;
-    data->philo[i].left_fork = i;
-		error = pthread_create(&data->philo[i].thread, NULL, &philo_rutine, &data->philo[i]);
-	  if (error != 0)
-    {
-      printf ("error al crear el hilo");
-      break;
-    }
-   // printf ("\ndespues -<%d %d\n", i, error);
-  }
-}
-
-void	monitoring(t_data *data)
-{
-	int i;
-  int error;
-
-  error = 0;
-	i = 0;
-	while (i++ < data->philo_num)
-  {
-    error = pthread_join(data->philo[i].thread, NULL);
-    if (error != 0)
-    {
-      printf ("error al esperar a que los hilos acaben");
-      break;
-    }
-    printf ("[%d]\n", i);
-  }
-}
-
- *inicializacion de los mutex mientras i sea menor o igual que el numero de filosofos
-:
-
-void  mutex_init(t_data *data)
-{
-  int i;  
-
-  i = 0;
-  int error = 0;
-  while (i++ < data->philo_num)
-  {
-  //  printf ("%d", i);
-    (error = pthread_mutex_init(&(data->forks[i]), NULL));
-    if (error != 0)
-    {
-      printf ("algo va mal");
-      break;
-    }
-  }
-}
-
-void  mutex_destroy(t_data *data)
-{
-  int i;
-  int error;
-
-  error = 0;
-  i = 0;
-  while (i++ < data->philo_num)
-  {
-    if (error != 0)
-    error = pthread_mutex_destroy (&data->forks[i]);
-    {
-      printf ("error al destruir los mutex");
-      break;
-    }
-  }
-}
-*/
-
-void ww(t_data *data)
-{
-  int i;
-
-  i = 0;
-  while (i++ < data->philo_num)
-  {
-    printf ("[%d]", i);
-  }
-}
-
 void  *philo_rutine(void *arg)
 {
   t_philo *philo;
@@ -198,13 +72,63 @@ void  mutex_destroy(t_data *data)
   }
 
 }
+*/
 
-void init(t_data *data)
+
+// teseting programing
+// ./filosofers 5 500 300 200 10
+
+/*
+philosofers.c:
+se trata de implementar una solución, para el problema de los filósofos que
+intentan comer de un bol de espaguetis necesitan dos tenedores para hacerlo
+y cada filosofo solo tiene uno.
+
+pthread_create -> crea un hilo nuevo para cada filosofo
+pthread_mutex_init -> inicializa el mutex
+pthread_mutex_lock -> bloquea el mutex
+philo_rutine ->  la rutina del filosofo, lo que aun no veo es que nececesita dos mutex para hacer su rutina
+pthread_mutex_unlock -> desbloquea el mutex
+pthread_join -> espera a que el hilo termine
+pthread_mutex_destroy -> destruye el mutex
+*/
+
+void *filo_rutine(void *args)
 {
-  crear_hilos (data);
-  monitor (data);
+  t_philo *philo; 
+  t_data *data;
+  
+  philo = (t_philo *)args;
+  data = philo->data;
+
+  printf ("philo-< [%d] [%p]\n", philo->id, data); 
+  return (NULL);
 }
 
+
+void init(t_data *data, t_philo *philo)
+{
+  data->thread = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);// hago un malloc a los hilos;
+  if (!data->thread)
+    return ;
+  philo->data = malloc(sizeof(philo->data));
+  if (!philo->data)
+    return;
+  int i;
+  int j;
+  i = 0;
+  while (i++ < data->philo_num)
+  {
+   philo[i].data = data; // nececesitaba guardar la info en la estrcutura del philoso para acceder a ella no se iba almacenar derrepente lol
+    pthread_create (&data->thread[i], NULL, &filo_rutine, &philo[i]);
+  }
+  
+  j = 0;
+  //sleep (3);
+ while (j++ < data->philo_num)
+    pthread_join (data->thread[j], NULL);
+ // free (philo);
+}
 
 /*
  * tengo que reservar memoria para los hilos y los mutex es lo que no veia xf
