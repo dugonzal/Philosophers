@@ -22,22 +22,26 @@ intentan comer de un bol de espaguetis necesitan dos tenedores para hacerlo
 y cada filosofo solo tiene uno.
 
 pthread_create -> crea un hilo nuevo para cada filosofo
-pthread_join -> espera a que el hilo termine
 pthread_mutex_init -> inicializa el mutex
 pthread_mutex_lock -> bloquea el mutex
+philo_rutine ->  la rutina del filosofo, lo que aun no veo es que nececesita dos mutex para hacer su rutina
 pthread_mutex_unlock -> desbloquea el mutex
+pthread_join -> espera a que el hilo termine
 pthread_mutex_destroy -> destruye el mutex
 */
-
+/*
 void	*philo_rutine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = ((t_philo *)arg);
-//	while (43)
+ //pthread_mutex_lock (&philo->data->forks[0]);
+  //	while (43)
 	{
 		printf (GREEN"philo exist xd: -> {%d}\n"RESET, philo->id);
 //		sleep (1);
+ //pthread_mutex_unlock(&philo->data->forks[0]);
+  //	while (43)
 	}
 	return (NULL);
 }
@@ -46,59 +50,173 @@ void	*philo_rutine(void *arg)
 void create_threads(t_data *data)
 {
 	int i;
+  int error;
 
-	i = 0;
+  i = 0;
+  error = 0;
 	while (i++ < data->philo_num)
 	{
-		pthread_create(&data->philo[i].thread, NULL, &philo_rutine, &data->philo[i]);
-		printf ("hilo -<[%d]\n", data->philo[i].id = i);
-	}
+		data->philo[i].id = i;
+    data->philo[i].left_fork = i;
+		error = pthread_create(&data->philo[i].thread, NULL, &philo_rutine, &data->philo[i]);
+	  if (error != 0)
+    {
+      printf ("error al crear el hilo");
+      break;
+    }
+   // printf ("\ndespues -<%d %d\n", i, error);
+  }
 }
 
 void	monitoring(t_data *data)
 {
 	int i;
+  int error;
 
+  error = 0;
 	i = 0;
-	while (i++ <= data->philo_num)
-		pthread_join(data->philo[i].thread, NULL);
+	while (i++ < data->philo_num)
+  {
+    error = pthread_join(data->philo[i].thread, NULL);
+    if (error != 0)
+    {
+      printf ("error al esperar a que los hilos acaben");
+      break;
+    }
+    printf ("[%d]\n", i);
+  }
+}
+
+ *inicializacion de los mutex mientras i sea menor o igual que el numero de filosofos
+:
+
+void  mutex_init(t_data *data)
+{
+  int i;  
+
+  i = 0;
+  int error = 0;
+  while (i++ < data->philo_num)
+  {
+  //  printf ("%d", i);
+    (error = pthread_mutex_init(&(data->forks[i]), NULL));
+    if (error != 0)
+    {
+      printf ("algo va mal");
+      break;
+    }
+  }
+}
+
+void  mutex_destroy(t_data *data)
+{
+  int i;
+  int error;
+
+  error = 0;
+  i = 0;
+  while (i++ < data->philo_num)
+  {
+    if (error != 0)
+    error = pthread_mutex_destroy (&data->forks[i]);
+    {
+      printf ("error al destruir los mutex");
+      break;
+    }
+  }
+}
+*/
+
+void ww(t_data *data)
+{
+  int i;
+
+  i = 0;
+  while (i++ < data->philo_num)
+  {
+    printf ("[%d]", i);
+  }
+}
+
+void  *philo_rutine(void *arg)
+{
+  t_philo *philo;
+  t_data *data;
+ 
+  philo = (t_philo *)arg;
+  data = philo->data;
+  printf ("%p", &data);
+  //ww(data);
+  //pthread_mutex_lock ();
+// printf ("%d",  data->philo_num);
+  printf ("philo exist -<[%d]\n", philo->id);
+ //pthread_mutex_unlock (&philo->data->forks[0]);
+  return (NULL);
+}
+void  crear_hilos(t_data *data)
+{
+  int i;
+
+  i = 0;
+  while (i++ < data->philo_num)
+  {
+   // data->philo[i].id = i;
+   // data->philo[i].left_fork = i;
+    pthread_create(&data->philo[i].thread, NULL, &philo_rutine, &data->philo[i]);
+  }
+}
+void init_mutex(t_data *data)
+{
+  int i;
+
+  i = 0;
+  data->forks = ()
+  while (i++ < data->philo_num)
+  {
+    pthread_mutex_init(&(data->forks[i]), NULL);
+  }
+}
+void monitor(t_data *data)
+{
+  int i;
+
+  i = 0;
+  while (i++ < data->philo_num)
+  {
+    pthread_join (data->philo[i].thread, NULL);
+  }
+}
+
+void  mutex_destroy(t_data *data)
+{
+  int i;
+
+  i = 0;
+  while (i++ < data->philo_num)
+  {
+    pthread_mutex_destroy (&data->forks[i]);
+  }
+
+}
+
+void init(t_data *data)
+{
+  crear_hilos (data);
+  monitor (data);
 }
 
 
 /*
- *inicializacion de los mutex mientras i sea menor o igual que el numero de filosofos
-:
+ * tengo que reservar memoria para los hilos y los mutex es lo que no veia xf
  * */
-int  mutex_init(t_data *data)
-{
-  int error;
-  int i;  
-
-  i = 0;
-  error = 0;
-  while (i++ < data->philo_num)
-  {
-    printf ("muxex -> [%d]\n", i); 
-     error =  pthread_mutex_init(&data->forks[i], NULL);
-     if (error != 0)
-        printf ("no se pudo crear el mutex fork[%d]\n", error);
-  }
-  printf ("!sale");
-  return (0);
-}
-
 int	main(int ac, char **av)
 {
-	t_data	*data;
+	t_data	data;
 
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
-		error(RED"Error: malloc failed\n"RESET);
-	memset(data, 0, sizeof(t_data));
-	parser(ac, av, data);
-	create_threads(data);
-  if (mutex_init (data) == 0)
-    printf ("sale en 0 con los tenedore creados");
-//	monitoring (data);
-	exit (EXIT_SUCCESS);
+  parser(ac, av, &data);
+  //printf ("[%d]", data.philo_num);
+ // monitor (&data);
+  //init_mutex (&data);
+  //mutex_destroy (&data);
+  exit (EXIT_SUCCESS);
 }
