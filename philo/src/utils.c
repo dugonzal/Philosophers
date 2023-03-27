@@ -12,7 +12,7 @@
 
 #include "../include/Philo.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, t_data *data)
 {
 	unsigned long int	nbr;
 
@@ -20,6 +20,7 @@ int	ft_atoi(const char *str)
 		str++;
 	if (*str == 45)
 	{
+    free  (data);
 		printf (RED"Error: no puede ser negativo\n"RESET);
 		exit (-1);
 	}

@@ -55,13 +55,21 @@ void	parser(int ac, char **av, t_data *data)
 	(ac > 1 && ft_strcmp(av[1], "--help") == 0))
 		help_msg();
 	if (ac < 5 || ac > 6)
+  {
+    free (data);
 		error (RED"Error: -> argumentos invalidos\n"RESET);
+  }
 	check_number (av);
-	data->philo_num = ft_atoi(av[1]);
-	data->time_to_die = ft_atoi(av[2]);
-	data->time_to_eat = ft_atoi(av[3]);
-	data->time_to_sleep = ft_atoi(av[4]);
+	data->philo_num = ft_atoi(av[1], data);
+  if (data->philo_num < 2)
+  {
+    free (data);
+    error (RED"Error: -> numero de filosofos invalido, deberia ser mas de 1\n"RESET);
+  }
+	data->time_to_die = ft_atoi(av[2], data);
+	data->time_to_eat = ft_atoi(av[3], data);
+	data->time_to_sleep = ft_atoi(av[4], data);
 	if (ac == 6)
-		data->must_eat = ft_atoi(av[5]);
+		data->must_eat = ft_atoi(av[5], data);
   init_threads (data);
 }
