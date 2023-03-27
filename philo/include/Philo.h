@@ -48,7 +48,7 @@ typedef struct s_philo
 	int			left_fork; // id del (tenedor o mutex) izquierdo
 	int			right_fork; // id del (tenedor o mutex) derecho
 	int			eat_count; // numero de veces que ha comido
-  t_data *data; // estructura general del programa
+  struct s_data *data; // estructura general del programa
 }t_philo;
 
 int		ft_isdigit(int str);
@@ -57,5 +57,5 @@ void 	parser(int ac, char **av, t_data *data);
 void	error(char *s);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
-void init(t_data *data, t_philo *philo);
+void *init(t_data *data);
 #endif

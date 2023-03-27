@@ -45,8 +45,6 @@ static void	check_number(char **av)
 
 void	parser(int ac, char **av, t_data *data)
 {
-  t_philo *philo; // inicializo a los filosos
-
   data = (t_data *)malloc(sizeof(t_data));
   if (!data)
       printf ("error: -> malloc error");
@@ -63,9 +61,5 @@ void	parser(int ac, char **av, t_data *data)
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		data->must_eat = ft_atoi(av[5]);
-	philo = malloc(sizeof(t_philo) * data->philo_num);
-	if (!philo)
-		error(RED"Error: -> malloc failed\n"RESET);
-	memset(philo, 0, sizeof(t_philo) * data->philo_num);
-  init (data, philo);
+  init (data);
 }
