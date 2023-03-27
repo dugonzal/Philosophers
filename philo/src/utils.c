@@ -67,3 +67,20 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	return (s1[i] - s2[i]);
 }
+
+
+//* obtenemos la fecha y la hora y los segundos actuales en milisegundos
+//  con la estrucutra timeval de la libreria estandat sys/time con la funcion gettimeofday
+//  d xx d
+//  d -- d
+//  dddddd
+long long get_time(void)
+{
+  struct timeval time;
+
+  gettimeofday(&time, NULL);
+  
+  printf ("[%ld]", (time.tv_sec ));
+  return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+  
+}

@@ -20,21 +20,20 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-#define BLACK "\033[0;30m"
-#define RED "\033[0;31m"
-#define GREEN "\033[0;32m"
-#define YELLOW "\033[0;33m"
-#define BLUE "\033[0;34m"
-#define MAGENTA "\033[0;35m"
-#define CYAN "\033[0;36m"
-#define RESET "\033[0m"
-
+# define BLACK "\033[0;30m"
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[0;34m"
+# define MAGENTA "\033[0;35m"
+# define CYAN "\033[0;36m"
+# define RESET "\033[0m"
 
 typedef struct s_data
 {
-	int			philo_num;	// numero de filosofos
-	int			time_to_die; // tiempo que muere
-	int			time_to_eat; // tiempo que come
+	int  philo_num;	// numero de filosofos
+	int  time_to_die; // tiempo que muere
+	int  time_to_eat; // tiempo que come
 	int			time_to_sleep; // tiempo que duerme
   int     time_to_thinking; // tiempo que piensa
 	int			must_eat; // -1 si no se pasa como argumento
@@ -59,4 +58,5 @@ void	error(char *s);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 void *init_threads(t_data *data);
+long long get_time(void);
 #endif

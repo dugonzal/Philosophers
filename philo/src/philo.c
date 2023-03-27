@@ -29,10 +29,10 @@ pthread_mutex_unlock -> desbloquea el mutex
 pthread_mutex_destroy -> destruye el mutex
 */
 
-void *philo_rutine(void *args)
+void  *philo_rutine(void *args)
 {
   t_philo *philo;
-  t_data *data;
+  t_data  *data;
 
   philo = (t_philo *)args;
   data = philo->data;
@@ -44,7 +44,7 @@ void *philo_rutine(void *args)
   return (NULL);
 }
 
-void *mutex_init(t_data *data, t_philo *philo)
+void  *mutex_init(t_data *data, t_philo *philo)
 {
   int i;
 
@@ -76,7 +76,6 @@ void *init_threads(t_data *data)
   {
     philo[i].id = i;
     philo[i].left_fork = i;
-    printf ("\n[%d]\n ", (i + 1) % data->philo_num);
     philo[i].right_fork = (i + 1) % data->philo_num;
     philo[i].data = data;
     pthread_create (&data->thread[i], NULL, &philo_rutine, &philo[i]);
@@ -99,5 +98,7 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	parser(ac, av, &data);
+  long long i = get_time();
+  printf ("[%lld]\n", i);
 	exit (EXIT_SUCCESS);
 }
