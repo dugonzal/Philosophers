@@ -61,5 +61,5 @@ void	parser(int ac, char **av, t_data *data)
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		data->must_eat = ft_atoi(av[5]);
-  init (data);
+  init_threads (data);
 }

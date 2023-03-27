@@ -38,6 +38,7 @@ typedef struct s_data
 	int			time_to_sleep; // tiempo que duerme
   int     time_to_thinking; // tiempo que piensa
 	int			must_eat; // -1 si no se pasa como argumento
+  int     dead; // aqui guradamos si hay algun filsf muerto
 	pthread_t	*thread; // hilo del filosofo
 	pthread_mutex_t	*forks; // array de mutex de los tenedores
   }	t_data;
@@ -57,5 +58,5 @@ void 	parser(int ac, char **av, t_data *data);
 void	error(char *s);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
-void *init(t_data *data);
+void *init_threads(t_data *data);
 #endif
