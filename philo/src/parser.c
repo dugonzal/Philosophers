@@ -23,6 +23,10 @@ void	help_msg(void)
 	printf ("Example: ./philosofers 5 800 200 200 [5]\n");
 	exit (EXIT_SUCCESS);
 }
+static int ft_isdigit(int c)
+{
+  return (c < 48 || c > 58);
+}
 
 static void	check_number(char **av)
 {
@@ -70,6 +74,13 @@ void	parser(int ac, char **av, t_data *data)
 	data->time_to_eat = ft_atoi(av[3], data);
 	data->time_to_sleep = ft_atoi(av[4], data);
 	if (ac == 6)
-		data->must_eat = ft_atoi(av[5], data);
+  {
+	  data->must_eat = ft_atoi(av[5], data);
+    if (data->must_eat < 1)
+    {
+      free (data);
+      return ;
+    }
+  }
   init_threads (data);
 }
