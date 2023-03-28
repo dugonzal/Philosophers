@@ -44,7 +44,7 @@ long long time_diff(long long present, long long past)
 void print(char *str, t_philo *philo, t_data *data)
 {
   if (str)
-    printf (BLUE"%lli %d %s\n"RESET, time_diff(get_time(), data->time) ,philo->id, str);
+    printf (BLUE"%lli %d %s\n"RESET, (get_time() - data->time),philo->id, str);
 }
 
 
@@ -53,12 +53,14 @@ void time_time(long long time, t_data *data)
   long long time_now;
 
   time_now = get_time ();
-  while (!data->dead)
+  printf ("[%lli] [%lli]\n", time_diff(get_time(), time_now), time);
+   (void)data; 
+ // while (!data->dead)
   {
-    if (time_diff (time_now, data->time) >= time)
+    if (time_diff (time_now, get_time()) >=  time)
       return ;
-    usleep (200);
   }
+
 }
 
 
@@ -82,7 +84,9 @@ void  *philo_rutine(void *args)
 
   philo = (t_philo *)args;
   data = philo->data;
-  while (!data->dead || philo->eat_count == data->must_eat)
+  //if (philo->id % 2 != 0)
+	//	usleep(15000);
+  //while (42/*!data->dead || !(philo->eat_count == data->must_eat)*/)
   {
     eating(philo, data);
   }
