@@ -36,15 +36,14 @@ void  *philo_rutine(void *args)
 
   philo = (t_philo *)args;
   data = philo->data;
-  (void)data;
 //  pthread_mutex_lock (&data->forks[philo->left_fork]);
  // while (42)
-  printf ("philo exits -<[%d] -< tenedor i<quierdo -<[%d] tenedor derecho -<[%d]\n", philo->id, philo->left_fork, philo->right_fork);
+  printf ("philo exits -<[%d]  [%p] tene->[%d]\n", philo->id, &data->forks[philo->left_fork], philo->left_fork );
   //pthread_mutex_unlock (&data->forks[philo->left_fork]);
   return (NULL);
 }
 
-void  *mutex_init(t_data *data, t_philo *philo)
+t_data  *mutex_init(t_data *data)
 {
   int i;
 
@@ -52,16 +51,16 @@ void  *mutex_init(t_data *data, t_philo *philo)
   if (!data->forks)
    return (NULL);
   i = 0;
-  while (i < data->philo_num)
+  while (i < data->philo_num )
   {
     pthread_mutex_init (&data->forks[i], NULL);
+    printf ("adress ->[%p] [%d]\n", &data->forks[i], i);
     i++;
   }
-  (void)philo;
-  return (NULL);
+  return (data);
 }
 
-void *init_threads(t_data *data)
+void init_threads(t_data *data)
 {
   t_philo *philo;
   int i;
@@ -70,8 +69,9 @@ void *init_threads(t_data *data)
   philo = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
   data->thread = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
   if (!philo || !data->thread)
-    return (NULL);
+    return ;
   memset (philo, 0, sizeof(t_philo) * data->philo_num);
+  data = mutex_init (data);
   while (i < data->philo_num)
   {
     philo[i].id = i;
@@ -80,17 +80,13 @@ void *init_threads(t_data *data)
     philo[i].data = data;
     pthread_create (&data->thread[i], NULL, &philo_rutine, &philo[i]);
     i++;
-    //  break;
   }
   i = 0;
-  mutex_init (data, philo);
-    while (i < data->philo_num)
-    {
-      pthread_join (data->thread[i], NULL);
-     // break;
-      i++;
-    }
-  return (NULL);
+  while (i < data->philo_num)
+  {
+    pthread_join (data->thread[i], NULL);
+     i++;
+   }
 }
 
 int	main(int ac, char **av)
@@ -98,7 +94,5 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	parser(ac, av, &data);
-  long long i = get_time();
-  printf ("[%lld]\n", i);
 	exit (EXIT_SUCCESS);
 }
