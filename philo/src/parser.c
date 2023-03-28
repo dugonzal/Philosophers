@@ -49,7 +49,7 @@ static void	check_number(char **av)
 	}
 }
 
-void	parser(int ac, char **av, t_data *data)
+t_data	*parser(int ac, char **av, t_data *data)
 {
   data = (t_data *)malloc(sizeof(t_data));
   if (!data)
@@ -79,8 +79,9 @@ void	parser(int ac, char **av, t_data *data)
     if (data->must_eat < 1)
     {
       free (data);
-      return ;
+      return (NULL);
     }
   }
   init_threads (data);
+  return (data);
 }

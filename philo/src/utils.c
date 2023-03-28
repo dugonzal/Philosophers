@@ -37,10 +37,7 @@ int	ft_atoi(const char *str, t_data *data)
 	return ((int)nbr);
 }
 
-int ft_isdigit(int c)
-{
-  return (c < 48 || c > 58);
-}
+
 
 int	ft_strlen(char *str)
 {
@@ -80,8 +77,6 @@ long long get_time(void)
   struct timeval time;
 
   gettimeofday(&time, NULL);
-  
-  printf ("[%ld]", (time.tv_sec ));
   return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
   
 }
