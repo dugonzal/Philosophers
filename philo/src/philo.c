@@ -36,13 +36,31 @@ pthread_mutex_destroy -> destruye el mutex
  * si duermen no piensan ni comen  -> funcion de dormir
  *
  */
-
+long long time_diff(long long present, long long past)
+{
+  return (present - past);
+}
 
 void print(char *str, t_philo *philo, t_data *data)
 {
   if (str)
-    printf ("%lli %d %s\n", data->time ,philo->id, str);
+    printf (BLUE"%lli %d %s\n"RESET, time_diff(get_time(), data->time) ,philo->id, str);
 }
+
+
+void time_time(long long time, t_data *data)
+{
+  long long time_now;
+
+  time_now = get_time ();
+  while (!data->dead)
+  {
+    if (time_diff (time_now, data->time) >= time)
+      return ;
+    usleep (200);
+  }
+}
+
 
 void eating(t_philo *philo, t_data *data)
 {
@@ -50,8 +68,11 @@ void eating(t_philo *philo, t_data *data)
   print ("has taken fork", philo, data);
   pthread_mutex_lock (&data->forks[philo->right_fork]);
   print ("has taken fork", philo, data);
-  pthread_mutex_unlock (&data->forks[philo->left_fork]);
-  pthread_mutex_unlock (&data->forks[philo->right_fork]);
+  time_time (data->time_to_eat, data);
+  print ("is eating", philo, data);
+  philo->eat_count++;
+ pthread_mutex_unlock (&data->forks[philo->left_fork]);
+ pthread_mutex_unlock (&data->forks[philo->right_fork]);
 } 
 
 void  *philo_rutine(void *args)
@@ -61,7 +82,10 @@ void  *philo_rutine(void *args)
 
   philo = (t_philo *)args;
   data = philo->data;
-  eating(philo, data);
+  while (!data->dead || philo->eat_count == data->must_eat)
+  {
+    eating(philo, data);
+  }
   return (NULL);
 }
 
