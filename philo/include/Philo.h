@@ -52,12 +52,11 @@ typedef struct s_philo
   struct s_data *data; // estructura general del programa
 }t_philo;
 
-int		ft_isdigit(int str);
 int		ft_atoi(const char *str, t_data *data);
 void 	parser(int ac, char **av, t_data *data);
 void	error(char *s);
 int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
-void *init_threads(t_data *data);
+void  init_threads(t_data *data);
 long long get_time(void);
 #endif

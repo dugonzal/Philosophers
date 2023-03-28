@@ -36,10 +36,10 @@ void  *philo_rutine(void *args)
 
   philo = (t_philo *)args;
   data = philo->data;
-//  pthread_mutex_lock (&data->forks[philo->left_fork]);
+  pthread_mutex_lock (&data->forks[philo->left_fork]);
  // while (42)
   printf ("philo exits -<[%d]  [%p] tene->[%d]\n", philo->id, &data->forks[philo->left_fork], philo->left_fork );
-  //pthread_mutex_unlock (&data->forks[philo->left_fork]);
+  pthread_mutex_unlock (&data->forks[philo->left_fork]);
   return (NULL);
 }
 
@@ -54,7 +54,7 @@ t_data  *mutex_init(t_data *data)
   while (i < data->philo_num )
   {
     pthread_mutex_init (&data->forks[i], NULL);
-    printf ("adress ->[%p] [%d]\n", &data->forks[i], i);
+    //printf ("adress ->[%p] [%d]\n", &data->forks[i], i);
     i++;
   }
   return (data);
@@ -71,7 +71,7 @@ void init_threads(t_data *data)
   if (!philo || !data->thread)
     return ;
   memset (philo, 0, sizeof(t_philo) * data->philo_num);
-  data = mutex_init (data);
+  mutex_init (data);
   while (i < data->philo_num)
   {
     philo[i].id = i;
