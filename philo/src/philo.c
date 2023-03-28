@@ -37,6 +37,23 @@ pthread_mutex_destroy -> destruye el mutex
  *
  */
 
+
+void print(char *str, t_philo *philo, t_data *data)
+{
+  if (str)
+    printf ("%lli %d %s\n", data->time ,philo->id, str);
+}
+
+void eating(t_philo *philo, t_data *data)
+{
+  pthread_mutex_lock (&data->forks[philo->left_fork]);
+  print ("has taken fork", philo, data);
+  pthread_mutex_lock (&data->forks[philo->right_fork]);
+  print ("has taken fork", philo, data);
+  pthread_mutex_unlock (&data->forks[philo->left_fork]);
+  pthread_mutex_unlock (&data->forks[philo->right_fork]);
+} 
+
 void  *philo_rutine(void *args)
 {
   t_philo *philo;
@@ -44,12 +61,7 @@ void  *philo_rutine(void *args)
 
   philo = (t_philo *)args;
   data = philo->data;
-  (void)data;
- // while (!data->dead)
-  {
-    printf ("philo exits -<[%d]\n", philo->id);
-  }
- // pthread_mutex_unlock (&data->forks[philo->left_fork]);
+  eating(philo, data);
   return (NULL);
 }
 
@@ -64,7 +76,6 @@ t_data  *mutex_init(t_data *data)
   while (i < data->philo_num )
   {
     pthread_mutex_init (&data->forks[i], NULL);
-    //printf ("adress ->[%p] [%d]\n", &data->forks[i], i);
     i++;
   }
   return (data);
@@ -103,7 +114,6 @@ void init_threads(t_data *data)
   memset (philo, 0, sizeof(t_philo) * data->philo_num);
   mutex_init (data);
   data->time = get_time ();
-  printf ("get_time[%lld]\n", data->time);
   while (i < data->philo_num)
   {
     philo[i].id = i;
