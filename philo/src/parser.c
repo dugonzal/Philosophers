@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 16:30:46 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:53:44 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ static void	check_args(char **av)
 	}
 }
 
+void	*free_data(t_data *data, char *s)
+{
+	free (data);
+	error (s);
+	return (NULL);
+}
+
 t_data	*parser(int ac, char **av, t_data *data)
 {
 	check_args (av);
@@ -62,28 +69,15 @@ t_data	*parser(int ac, char **av, t_data *data)
 	(ac > 1 && !ft_strcmp(av[1], "--help")))
 		help_msg();
 	if (ac < 5 || ac > 6)
-	{
-		free (data);
-		error (RED"Error: -> argumentos invalidos\n"RESET);
-	}
+		return (free_data(data, RED"Error: -> numero de argumentos invalido\n"RESET));
 	data->philo_num = ft_atoi(av[1], data);
 	if (data->philo_num < 2)
-	{
-		free (data);
-		error (RED"Error: -> numero de filosofos invalido, deberia ser mas de 1\n"RESET);
-	}
+		return (free_data(data, RED"Error: -> numero de filosofos invalido\n"RESET));
 	data->time_to_die = ft_atoi(av[2], data);
 	data->time_to_eat = ft_atoi(av[3], data);
 	data->time_to_sleep = ft_atoi(av[4], data);
 	if (ac == 6)
-	{
 		data->must_eat = ft_atoi(av[5], data);
-		if (data->must_eat < 1)
-		{
-			free (data);
-			return (NULL);
-		}
-	}
-	init_threads (data);
+	init_threads(data);
 	return (data);
 }

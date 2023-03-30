@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 14:08:17 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 15:32:31 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 17:00:21 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void time_time(long int time)
 			break ;
 }
 
-void print(char *str, t_philo *philo, t_data *data)
+void print_log(char *str, t_philo *philo, t_data *data)
 {
 	pthread_mutex_lock(&data->print);
 	if (str)

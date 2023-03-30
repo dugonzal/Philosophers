@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 16:43:33 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 17:03:02 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,32 @@ pthread_mutex_destroy -> destruye el mutex
 
 } */
 
+/*
+si el philo no empieza a comer en x tiempo desde el inicio del programa
+o desde su ultimo bocado, muere
+*/
 void	philo_life(t_philo *philo, t_data *data)
 {
-	pthread_mutex_lock (&data->forks[philo->left_fork]);
-	print("has taken a fork", philo, data);
-	pthread_mutex_lock (&data->forks[philo->right_fork]);
-	print("has taken a fork", philo, data);
-	time_time(data->time_to_eat);
-	print("is eating", philo, data);
-	pthread_mutex_unlock (&data->forks[philo->left_fork]);
-	pthread_mutex_unlock (&data->forks[philo->right_fork]);
-	philo->eat_count++;
-	time_time(data->time_to_sleep);
-	print("is sleeping", philo, data);
+	while (42)
+	{
+		pthread_mutex_lock (&data->forks[philo->left_fork]);
+		print_log("has taken a fork", philo, data);
+		pthread_mutex_lock (&data->forks[philo->right_fork]);
+		print_log("has taken a fork", philo, data);
+		time_time(data->time_to_eat);
+		philo->last_eat = get_time();
+		print_log("is eating", philo, data);
+		pthread_mutex_unlock (&data->forks[philo->left_fork]);
+		pthread_mutex_unlock (&data->forks[philo->right_fork]);
+		philo->eat_count++;
+		time_time(data->time_to_sleep);
+		print_log("is sleeping", philo, data);
+		print_log("is thinking", philo, data);
+		if (philo->eat_count == data->must_eat)
+			break ;
+		printf (RED"eat_count:" );
+	}
+
 }
 
 void  *philo_rutine(void *args)
@@ -64,13 +77,7 @@ void  *philo_rutine(void *args)
 
 	philo = (t_philo *)args;
 	data  = philo->data;
-	while (42)
-	{
-		philo_life(philo, data);
-		if (philo->eat_count == data->must_eat)
-			break ;
-		print("is thinking", philo, data);
-	}
+	philo_life(philo, data);
 	return (NULL);
 }
 
@@ -106,10 +113,7 @@ void	init_threads(t_data *data)
 	philo = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
 	data->thread = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
 	if (!philo || !data->thread)
-	{
-		free (data);
-		return ;
-	}
+		free_data(data, RED"Error: malloc failed"RESET);
 	memset (philo, 0, sizeof(t_philo) * data->philo_num);
 	mutex_init (data);
 	data->time = get_time ();
@@ -120,7 +124,7 @@ void	init_threads(t_data *data)
 		philo[i].left_fork = i;
 		philo[i].right_fork = (i + 1) % data->philo_num;
 		philo[i].data = data;
-		philo[i].time = data->time; // asi todos los filosofos tienen el mismo tiempo
+		philo[i].last_eat = data->time; // asi todos los filosofos tienen el mismo tiempo
 		pthread_create (&data->thread[i], NULL, &philo_rutine, &philo[i]);
 	}
 	i = -1;
@@ -135,6 +139,5 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	parser(ac, av, &data);
-	init_threads(&data);
 	exit (EXIT_SUCCESS);
 }

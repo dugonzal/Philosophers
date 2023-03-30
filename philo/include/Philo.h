@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 16:40:56 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 17:02:48 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_philo
 	int				left_fork; // id del (tenedor o mutex) izquierdo
 	int				right_fork; // id del (tenedor o mutex) derecho
 	int				eat_count; // numero de veces que ha comido
-	long int		time;
+	long int		last_eat; // tiempo en el que ha comido
 	struct s_data 	*data; // estructura general del programa
 }	t_philo;
 
@@ -63,6 +63,7 @@ long int	get_time(void);
 void		clean(t_data *data, t_philo *philo);
 long int	time_diff(long int present, long int past);
 void		time_time(long int time);
-void		print(char *str, t_philo *philo, t_data *data);
+void		print_log(char *str, t_philo *philo, t_data *data);
+void		*free_data(t_data *data, char *s);
 
 #endif
