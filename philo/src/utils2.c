@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 14:08:17 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 15:26:35 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:30:07 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ long int time_diff(long int present, long int past)
 	return (present - past);
 }
 
-//
+// revisar esta funcion +++<-------
 void time_time(long int time)
 {
 	long int	start;
