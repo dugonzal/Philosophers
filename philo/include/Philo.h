@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/03 19:12:23 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:08:38 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,6 @@ int		ft_strlen(char *str);
 int		ft_strcmp(char *s1, char *s2);
 void  init_threads(t_data *data);
 long long get_time(void);
+void clean(t_data *data, t_philo *philo);
+
 #endif

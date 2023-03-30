@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/03 20:27:28 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:06:38 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,13 @@ static void	check_number(char **av)
 		j = 0;
 		while (av[i][j])
 		{
-      if (av[i][j] == '+' || av[i][j] == '-')
-        break;
-      else if (ft_isdigit(av[i][j]))
-				error (RED"Error: -> no es un numero"RESET);
+			if (av[i][j] == '+' || av[i][j] == '-')
+			{
+				if (ft_isdigit(av[i][j + 1]))
+					error (RED"Error: -> no es un numero"RESET);
+				else
+					break;
+			}
 			j++;
 		}
 		i++;

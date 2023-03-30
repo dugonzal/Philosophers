@@ -6,7 +6,7 @@
 #    By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 23:10:38 by ciclo             #+#    #+#              #
-#    Updated: 2023/02/28 12:00:50 by ciclo            ###   ########.fr        #
+#    Updated: 2023/03/30 14:08:57 by ciclo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ R			:= rm -rf
 OBJ_DIR		:= obj/
 SRC_DIR		:= src/
 
-SRC_FILES	:= philo utils parser
+SRC_FILES	:= philo utils utils2 parser
 
 SRC			:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
@@ -28,7 +28,7 @@ ifndef verbose
 .SILENT:
 endif
 
-all: $(NAME) 
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) -lpthread $(OBJ) -o $@

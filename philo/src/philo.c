@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 14:00:16 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:10:19 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void time_time(long int time)
 
 }
 
-void philo_dead(t_data *data, t_philo *philo)
+/* void philo_dead(t_data *data, t_philo *philo)
 {
-  
-}
+
+} */
 
 void philo_life(t_philo *philo, t_data *data)
 {
@@ -100,12 +100,9 @@ t_data  *mutex_init(t_data *data)
   data->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->philo_num);
   if (!data->forks)
    return (NULL);
-  i = 0;
-  while (i < data->philo_num )
-  {
+  i = -1;
+  while (++i < data->philo_num )
     pthread_mutex_init (&data->forks[i], NULL);
-    i++;
-  }
   return (data);
 }
 
@@ -113,28 +110,18 @@ void  mutex_destroy(t_data *data)
 {
   int i;
 
-  i = 0;
-  while (i < data->philo_num)
-  {
+  i = -1;
+  while (++i < data->philo_num)
     pthread_mutex_destroy (&data->forks[i]);
-    i++;
-  }
 }
 
-void clean(t_data *data, t_philo *philo)
-{
-  free (data->thread);
-  free (data->forks);
-  free (data);
-  free (philo);
-}
+
 
 void init_threads(t_data *data)
 {
   t_philo *philo;
   int i;
 
-  i = 0;
   philo = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
   data->thread = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
   if (!philo || !data->thread)
@@ -142,7 +129,8 @@ void init_threads(t_data *data)
   memset (philo, 0, sizeof(t_philo) * data->philo_num);
   mutex_init (data);
   data->time = get_time ();
-  while (i < data->philo_num)
+  i = -1;
+  while (++i < data->philo_num)
   {
     philo[i].id = i;
     philo[i].left_fork = i;
@@ -150,14 +138,10 @@ void init_threads(t_data *data)
     philo[i].data = data;
     philo[i].time = data->time;
     pthread_create (&data->thread[i], NULL, &philo_rutine, &philo[i]);
-    i++;
   }
-  i = 0;
-  while (i < data->philo_num)
-  {
+  i = -1;
+  while (++i < data->philo_num)
     pthread_join (data->thread[i], NULL);
-     i++;
-   }
 	mutex_destroy (data);
   clean (data, philo);
 }
