@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 16:53:44 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 18:27:39 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ t_data	*parser(int ac, char **av, t_data *data)
 	if (ac < 5 || ac > 6)
 		return (free_data(data, RED"Error: -> numero de argumentos invalido\n"RESET));
 	data->philo_num = ft_atoi(av[1], data);
-	if (data->philo_num < 2)
-		return (free_data(data, RED"Error: -> numero de filosofos invalido\n"RESET));
+	//if (data->philo_num < 2)
+		//return (free_data(data, RED"Error: -> numero de filosofos invalido\n"RESET));
 	data->time_to_die = ft_atoi(av[2], data);
 	data->time_to_eat = ft_atoi(av[3], data);
 	data->time_to_sleep = ft_atoi(av[4], data);
