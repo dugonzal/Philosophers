@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 14:08:17 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 15:30:07 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:32:31 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void print(char *str, t_philo *philo, t_data *data)
 {
 	pthread_mutex_lock(&data->print);
 	if (str)
-		printf (BLUE"%li %d %s\n"RESET, (get_time() - data->time),\
+		printf (BLUE"%li %d %s\n"RESET, (get_time() - philo->time),\
 		philo->id, str);
 	pthread_mutex_unlock(&data->print);
 }
