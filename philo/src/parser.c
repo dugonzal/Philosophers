@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 15:48:47 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:23:01 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int ft_isdigit(int c)
   return (c < 48 || c > 58);
 }
 
-static void	check_number(char **av)
+static void	check_args(char **av)
 {
 	int i;
 	int j;
@@ -38,20 +38,22 @@ static void	check_number(char **av)
 	{
 		j = 0;
 		while (av[i][j])
-		{
 			if (av[i][j] == '+' || av[i][j] == '-')
-					break;
+				if (av[i][j + 1] == '+' || av[i][j + 1] == '-')
+					error (RED"Error: -> no es un numero\n"RESET);
+				else
+					break ;
 			else if (ft_isdigit(av[i][j]))
 					error (RED"Error: -> no es un numero\n"RESET);
-			j++;
-		}
+			else
+				j++;
 		i++;
 	}
 }
 
 t_data	*parser(int ac, char **av, t_data *data)
 {
-	check_number (av);
+	check_args (av);
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 		error (RED"Error: -> malloc\n"RESET);
