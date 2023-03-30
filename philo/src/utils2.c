@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 14:08:17 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 14:08:26 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:13:58 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,24 @@ void clean(t_data *data, t_philo *philo)
   free (data->forks);
   free (data);
   free (philo);
+}
+
+long int time_diff(long int present, long int past)
+{
+  return (present - past);
+}
+
+void time_time(long int time)
+{
+  long int start;
+
+  start = get_time();
+  while (time_diff(get_time(), start) < time)
+    usleep(100);
+}
+
+void print(char *str, t_philo *philo, t_data *data)
+{
+  if (str)
+    printf (BLUE"%lli %d %s\n"RESET, (get_time() - data->time), philo->id, str);
 }

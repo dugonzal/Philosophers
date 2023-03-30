@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 14:10:19 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:13:51 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,10 @@ pthread_mutex_destroy -> destruye el mutex
  * si duermen no piensan ni comen  -> funcion de dormir
  *
  */
-long int time_diff(long int present, long int past)
-{
-  return (present - past);
-}
-
-void print(char *str, t_philo *philo, t_data *data)
-{
-  if (str)
-    printf (BLUE"%lli %d %s\n"RESET, (get_time() - data->time), philo->id, str);
-}
 
 
-void time_time(long int time)
-{
-  long int start;
 
-  start = get_time();
-  while (time_diff(get_time(), start) < time)
-    usleep(100);
 
-}
 
 /* void philo_dead(t_data *data, t_philo *philo)
 {
