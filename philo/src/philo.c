@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 16:14:35 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:43:33 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ pthread_mutex_destroy -> destruye el mutex
 
 } */
 
-void	philo_eats(t_philo *philo, t_data *data)
+void	philo_life(t_philo *philo, t_data *data)
 {
 	pthread_mutex_lock (&data->forks[philo->left_fork]);
 	print("has taken a fork", philo, data);
@@ -53,6 +53,8 @@ void	philo_eats(t_philo *philo, t_data *data)
 	pthread_mutex_unlock (&data->forks[philo->left_fork]);
 	pthread_mutex_unlock (&data->forks[philo->right_fork]);
 	philo->eat_count++;
+	time_time(data->time_to_sleep);
+	print("is sleeping", philo, data);
 }
 
 void  *philo_rutine(void *args)
@@ -64,12 +66,9 @@ void  *philo_rutine(void *args)
 	data  = philo->data;
 	while (42)
 	{
-		philo_eats(philo, data);
-		print("is sleeping", philo, data);
-		time_time(data->time_to_sleep);
+		philo_life(philo, data);
 		if (philo->eat_count == data->must_eat)
 			break ;
-		time_time(data->time_to_thinking);
 		print("is thinking", philo, data);
 	}
 	return (NULL);
@@ -136,5 +135,6 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	parser(ac, av, &data);
+	init_threads(&data);
 	exit (EXIT_SUCCESS);
 }

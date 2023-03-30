@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 15:30:51 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:40:56 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_data
 	int 			time_to_die; // tiempo que muere si no come;
 	int 			time_to_eat; // tiempo que come
 	int				time_to_sleep; // tiempo que duerme
-	int				time_to_thinking; // tiempo que piensa
 	int				must_eat; // -1 si no se pasa como argumento
 	int				dead; // aqui guradamos si hay algun filsf muerto
 	long int		time;
