@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 16:12:47 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:14:35 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,10 @@ void	init_threads(t_data *data)
 	philo = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
 	data->thread = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
 	if (!philo || !data->thread)
+	{
+		free (data);
 		return ;
+	}
 	memset (philo, 0, sizeof(t_philo) * data->philo_num);
 	mutex_init (data);
 	data->time = get_time ();
