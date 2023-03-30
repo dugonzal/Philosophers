@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 14:30:57 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:19:56 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_data  *mutex_init(t_data *data)
   i = -1;
   while (++i < data->philo_num )
     pthread_mutex_init (&data->forks[i], NULL);
+  pthread_mutex_init (&data->print, NULL); // no hace falta hacer malloc porque es un puntero
   return (data);
 }
 

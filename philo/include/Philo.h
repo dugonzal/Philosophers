@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 14:25:46 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:18:04 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	long int		time;
 	pthread_t		*thread; // hilo del filosofo
 	pthread_mutex_t	*forks; // array de mutex de los tenedores
+	pthread_mutex_t	print; // mutex para imprimir
 }	t_data;
 
 typedef struct s_philo
