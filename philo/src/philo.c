@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 18:38:02 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 18:51:07 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,21 @@ pthread_mutex_destroy -> destruye el mutex
 si el philo no empieza a comer en x tiempo desde el inicio del programa
 o desde su ultimo bocado, muere
 */
+
+void dead(t_data *data, t_philo *philo)
+{
+	if ((get_time() - philo->last_eat) >= data->time_to_die)
+	{
+		print_log("died", philo, data);
+		data->dead += 1;
+	}
+}
+
 void	philo_life(t_philo *philo, t_data *data)
 {
 	while (!data->dead)
 	{
-		if ((get_time() - philo->last_eat) >= data->time_to_die)
-		{
-			print_log("died", philo, data);
-			data->dead += 1;
-			break;
-		}
+		dead (data, philo);
 		pthread_mutex_lock (&data->forks[philo->left_fork]);
 		print_log("has taken a fork", philo, data);
 		pthread_mutex_lock (&data->forks[philo->right_fork]);
@@ -66,11 +71,13 @@ void	philo_life(t_philo *philo, t_data *data)
 		pthread_mutex_unlock (&data->forks[philo->left_fork]);
 		pthread_mutex_unlock (&data->forks[philo->right_fork]);
 		philo->eat_count++;
+		dead (data, philo);
 		time_time(data->time_to_sleep);
 		print_log("is sleeping", philo, data);
-		if (philo->eat_count == data->must_eat)
+		if (data->must_eat == philo->eat_count)
 			break;
 		print_log("is thinking", philo, data);
+		dead (data, philo);
 	}
 }
 
