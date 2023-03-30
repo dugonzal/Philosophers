@@ -32,13 +32,13 @@
 typedef struct s_data
 {
 	int  philo_num;	// numero de filosofos
-	int  time_to_die; // tiempo que muere
+	int  time_to_die; // tiempo que muere si no come;
 	int  time_to_eat; // tiempo que come
 	int			time_to_sleep; // tiempo que duerme
   int     time_to_thinking; // tiempo que piensa
 	int			must_eat; // -1 si no se pasa como argumento
   int     dead; // aqui guradamos si hay algun filsf muerto
-  long long     time;
+  long int     time;
   pthread_t	*thread; // hilo del filosofo
 	pthread_mutex_t	*forks; // array de mutex de los tenedores
   }	t_data;
@@ -49,6 +49,7 @@ typedef struct s_philo
 	int			left_fork; // id del (tenedor o mutex) izquierdo
 	int			right_fork; // id del (tenedor o mutex) derecho
 	int			eat_count; // numero de veces que ha comido
+  long int time;
   struct s_data *data; // estructura general del programa
 }t_philo;
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosofers.c                                      :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/03 20:39:01 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 13:55:28 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ pthread_mutex_destroy -> destruye el mutex
  * si duermen no piensan ni comen  -> funcion de dormir
  *
  */
-long long time_diff(long long present, long long past)
+long int time_diff(long int present, long int past)
 {
   return (present - past);
 }
@@ -44,22 +44,17 @@ long long time_diff(long long present, long long past)
 void print(char *str, t_philo *philo, t_data *data)
 {
   if (str)
-    printf (BLUE"%lli %d %s\n"RESET, (get_time() - data->time),philo->id, str);
+    printf (BLUE"%lli %d %s\n"RESET, (get_time() - data->time), philo->id, str);
 }
 
 
-void time_time(long long time, t_data *data)
+void time_time(long int time)
 {
-  long long time_now;
+  long int start;
 
-  time_now = get_time ();
-  printf ("[%lli] [%lli]\n", time_diff(get_time(), time_now), time);
-   (void)data; 
- // while (!data->dead)
-  {
-    if (time_diff (time_now, get_time()) >=  time)
-      return ;
-  }
+  start = get_time();
+  while (time_diff(get_time(), start) < time)
+    usleep(100);
 
 }
 
@@ -67,15 +62,17 @@ void time_time(long long time, t_data *data)
 void eating(t_philo *philo, t_data *data)
 {
   pthread_mutex_lock (&data->forks[philo->left_fork]);
-  print ("has taken fork", philo, data);
+  print("has taken a fork", philo, data);
   pthread_mutex_lock (&data->forks[philo->right_fork]);
-  print ("has taken fork", philo, data);
-  time_time (data->time_to_eat, data);
-  print ("is eating", philo, data);
-  philo->eat_count++;
- pthread_mutex_unlock (&data->forks[philo->left_fork]);
- pthread_mutex_unlock (&data->forks[philo->right_fork]);
-} 
+  print("has taken a fork", philo, data);
+  print("is eating", philo, data);
+  time_time(data->time_to_eat);
+  pthread_mutex_unlock (&data->forks[philo->left_fork]);
+  pthread_mutex_unlock (&data->forks[philo->right_fork]);
+  print("is sleeping", philo, data);
+  time_time(data->time_to_sleep);
+  print("is thinking", philo, data);
+}
 
 void  *philo_rutine(void *args)
 {
@@ -84,9 +81,7 @@ void  *philo_rutine(void *args)
 
   philo = (t_philo *)args;
   data = philo->data;
-  //if (philo->id % 2 != 0)
-	//	usleep(15000);
-  //while (42/*!data->dead || !(philo->eat_count == data->must_eat)*/)
+  while (42)
   {
     eating(philo, data);
   }
@@ -148,6 +143,7 @@ void init_threads(t_data *data)
     philo[i].left_fork = i;
     philo[i].right_fork = (i + 1) % data->philo_num;
     philo[i].data = data;
+    philo[i].time = data->time;
     pthread_create (&data->thread[i], NULL, &philo_rutine, &philo[i]);
     i++;
   }
