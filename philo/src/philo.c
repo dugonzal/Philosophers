@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 15:19:56 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:35:37 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void  mutex_destroy(t_data *data)
   i = -1;
   while (++i < data->philo_num)
     pthread_mutex_destroy (&data->forks[i]);
+  pthread_mutex_destroy (&data->print);
 }
 
 
