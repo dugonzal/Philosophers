@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 16:03:41 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:12:47 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ pthread_mutex_destroy -> destruye el mutex
 
 } */
 
-void	philo_eat(t_philo *philo, t_data *data)
+void	philo_eats(t_philo *philo, t_data *data)
 {
 	pthread_mutex_lock (&data->forks[philo->left_fork]);
 	print("has taken a fork", philo, data);
@@ -64,13 +64,13 @@ void  *philo_rutine(void *args)
 	data  = philo->data;
 	while (42)
 	{
-		philo_life(philo, data);
-		time_time(data->time_to_sleep);
+		philo_eats(philo, data);
 		print("is sleeping", philo, data);
+		time_time(data->time_to_sleep);
 		if (philo->eat_count == data->must_eat)
 			break ;
-		print("is thinking", philo, data);
 		time_time(data->time_to_thinking);
+		print("is thinking", philo, data);
 	}
 	return (NULL);
 }
@@ -118,7 +118,7 @@ void	init_threads(t_data *data)
 		philo[i].left_fork = i;
 		philo[i].right_fork = (i + 1) % data->philo_num;
 		philo[i].data = data;
-		philo[i].time = data->time;
+		philo[i].time = data->time; // asi todos los filosofos tienen el mismo tiempo
 		pthread_create (&data->thread[i], NULL, &philo_rutine, &philo[i]);
 	}
 	i = -1;

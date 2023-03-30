@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 14:06:38 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:48:47 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,9 @@ static void	check_number(char **av)
 		while (av[i][j])
 		{
 			if (av[i][j] == '+' || av[i][j] == '-')
-			{
-				if (ft_isdigit(av[i][j + 1]))
-					error (RED"Error: -> no es un numero"RESET);
-				else
 					break;
-			}
+			else if (ft_isdigit(av[i][j]))
+					error (RED"Error: -> no es un numero\n"RESET);
 			j++;
 		}
 		i++;
@@ -54,37 +51,37 @@ static void	check_number(char **av)
 
 t_data	*parser(int ac, char **av, t_data *data)
 {
-  data = (t_data *)malloc(sizeof(t_data));
-  if (!data)
-      printf ("error: -> malloc error");
-  memset (data, 0, sizeof(t_data));
+	check_number (av);
+	data = (t_data *)malloc(sizeof(t_data));
+	if (!data)
+		error (RED"Error: -> malloc\n"RESET);
+	memset (data, 0, sizeof(t_data));
 	if ((ac > 1 && ft_strcmp(av[1], "-h") == 0) || \
 	(ac > 1 && ft_strcmp(av[1], "--help") == 0))
 		help_msg();
 	if (ac < 5 || ac > 6)
-  {
-    free (data);
+	{
+		free (data);
 		error (RED"Error: -> argumentos invalidos\n"RESET);
-  }
-	check_number (av);
+	}
 	data->philo_num = ft_atoi(av[1], data);
-  if (data->philo_num < 2)
-  {
-    free (data);
-    error (RED"Error: -> numero de filosofos invalido, deberia ser mas de 1\n"RESET);
-  }
+	if (data->philo_num < 2)
+	{
+		free (data);
+		error (RED"Error: -> numero de filosofos invalido, deberia ser mas de 1\n"RESET);
+	}
 	data->time_to_die = ft_atoi(av[2], data);
 	data->time_to_eat = ft_atoi(av[3], data);
 	data->time_to_sleep = ft_atoi(av[4], data);
 	if (ac == 6)
-  {
-	  data->must_eat = ft_atoi(av[5], data);
-    if (data->must_eat < 1)
-    {
-      free (data);
-      return (NULL);
-    }
-  }
-  init_threads (data);
-  return (data);
+	{
+		data->must_eat = ft_atoi(av[5], data);
+		if (data->must_eat < 1)
+		{
+			free (data);
+			return (NULL);
+		}
+	}
+	init_threads (data);
+	return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:57:44 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 14:30:26 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 15:44:50 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_atoi(const char *str, t_data *data)
 	{
 		free (data);
 		printf (RED"Error: no puede ser negativo\n"RESET);
-		exit (-1);
+		exit (EXIT_FAILURE);
 	}
 	if (*str ==  43)
 		str++;
@@ -33,7 +33,7 @@ int	ft_atoi(const char *str, t_data *data)
 	{
 		free (data);
 		printf (RED"Error: no puede ser mayor a 2147483647\n"RESET);
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 	return ((int)nbr);
 }
@@ -52,6 +52,7 @@ void	error(char *s)
 {
 	if (s)
 		write(2, s, ft_strlen(s));
+	exit (EXIT_FAILURE);
 }
 
 int	ft_strcmp(char *s1, char *s2)
