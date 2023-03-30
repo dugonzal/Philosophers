@@ -6,7 +6,7 @@
 #    By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 23:10:38 by ciclo             #+#    #+#              #
-#    Updated: 2023/03/30 14:08:57 by ciclo            ###   ########.fr        #
+#    Updated: 2023/03/30 14:29:04 by ciclo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ rm-asm:
 	$(R) asm
 
 norm:
-	norminette $(SRC_DIR)*.c $(SRC_DIR)*.h
+	norminette $(SRC_DIR)*.c include/*.h
+
 clean:
 	$(R) $(NAME)
 
@@ -57,10 +58,10 @@ re: fclean all
 
 val: all
 	valgrind --leak-check=full \
-         --show-leak-kinds=all \
-         --track-origins=yes \
-         --verbose \
-         --log-file=valgrind-out.txt \
-				 ./$(NAME) 5 800 200 200
+		--show-leak-kinds=all \
+		--track-origins=yes \
+		--verbose \
+		--log-file=valgrind-out.txt \
+		./$(NAME) 5 800 200 200
 
 .PHONY: all clean fclean re asm rm-asm norm

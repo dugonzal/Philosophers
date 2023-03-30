@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 14:22:20 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:25:46 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_philo
 	int				right_fork; // id del (tenedor o mutex) derecho
 	int				eat_count; // numero de veces que ha comido
 	long int		time;
-	struct s_data 	data; // estructura general del programa
-}t_philo;
+	struct s_data 	*data; // estructura general del programa
+}	t_philo;
 
 int			ft_atoi(const char *str, t_data *data);
 t_data		*parser(int ac, char **av, t_data *data);

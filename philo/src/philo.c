@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 14:13:51 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:30:57 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,6 @@ pthread_mutex_destroy -> destruye el mutex
  *
  */
 
-
-
-
-
 /* void philo_dead(t_data *data, t_philo *philo)
 {
 
@@ -68,7 +64,7 @@ void  *philo_rutine(void *args)
   t_data  *data;
 
   philo = (t_philo *)args;
-  data = philo->data;
+  data  = philo->data;
   while (42)
   {
     philo_life(philo, data);

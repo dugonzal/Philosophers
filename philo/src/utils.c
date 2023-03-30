@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:57:44 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/03 19:27:03 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 14:30:26 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,23 @@ int	ft_atoi(const char *str, t_data *data)
 		str++;
 	if (*str == 45)
 	{
-    free  (data);
+		free (data);
 		printf (RED"Error: no puede ser negativo\n"RESET);
 		exit (-1);
 	}
 	if (*str ==  43)
 		str++;
 	nbr = 0;
-	while (*str > 47 && *str < 58)
+	while (*str && *str > 47 && *str < 58)
 		nbr = nbr * 10 + *str++ - 48;
 	if (nbr > 2147483647)
 	{
+		free (data);
 		printf (RED"Error: no puede ser mayor a 2147483647\n"RESET);
 		exit (1);
 	}
 	return ((int)nbr);
 }
-
-
 
 int	ft_strlen(char *str)
 {
@@ -53,7 +52,6 @@ void	error(char *s)
 {
 	if (s)
 		write(2, s, ft_strlen(s));
-	exit (1);
 }
 
 int	ft_strcmp(char *s1, char *s2)
@@ -66,17 +64,10 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-
-//* obtenemos la fecha y la hora y los segundos actuales en milisegundos
-//  con la estrucutra timeval de la libreria estandat sys/time con la funcion gettimeofday
-//  d xx d
-//  d -- d
-//  dddddd
-long long get_time(void)
+long int	get_time(void)
 {
-  struct timeval time;
+	struct timeval	time;
 
-  gettimeofday(&time, NULL);
-  return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-  
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
