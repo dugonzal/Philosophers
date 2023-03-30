@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 16:27:28 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/30 16:30:46 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	help_msg(void)
 {
-	printf (BLUE"Philo: opcion help -> flag: [--help] [-h]\n\n"RESET);
+	printf (BLUE"Philosophers: opcion help -> flag: [-h] [--help]\n\n"RESET);
 	printf ("Usage:	 ./philo number_of_philosophers time_to_die time_to_eat \
 	time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
 	printf ("Uso:	 ./philo numero_de_filosofos tiempo_antes_de_comer \
@@ -58,8 +58,8 @@ t_data	*parser(int ac, char **av, t_data *data)
 	if (!data)
 		error (RED"Error: -> malloc\n"RESET);
 	memset (data, 0, sizeof(t_data));
-	if ((ac > 1 && ft_strcmp(av[1], "-h") == 0) || \
-	(ac > 1 && ft_strcmp(av[1], "--help") == 0))
+	if ((ac > 1 && !ft_strcmp(av[1], "-h")) || \
+	(ac > 1 && !ft_strcmp(av[1], "--help")))
 		help_msg();
 	if (ac < 5 || ac > 6)
 	{
