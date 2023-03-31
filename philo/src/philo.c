@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 18:51:07 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/31 10:20:22 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	philo_life(t_philo *philo, t_data *data)
 {
 	while (!data->dead)
 	{
-		dead (data, philo);
 		pthread_mutex_lock (&data->forks[philo->left_fork]);
 		print_log("has taken a fork", philo, data);
+		dead (data, philo);
 		pthread_mutex_lock (&data->forks[philo->right_fork]);
 		print_log("has taken a fork", philo, data);
 		philo->last_eat = get_time();
@@ -88,6 +88,8 @@ void  *philo_rutine(void *args)
 
 	philo = (t_philo *)args;
 	data  = philo->data;
+	if (philo->id % 2 == 0) // si el id es par duerme antes de comer y viceversa para evitar el deadlock
+		usleep (100);
 	philo_life(philo, data);
 	return (NULL);
 }
