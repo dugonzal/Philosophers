@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/31 10:20:22 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/31 10:48:00 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ si el philo no empieza a comer en x tiempo desde el inicio del programa
 o desde su ultimo bocado, muere
 */
 
-void dead(t_data *data, t_philo *philo)
+int dead(t_data *data, t_philo *philo)
 {
 	if ((get_time() - philo->last_eat) >= data->time_to_die)
 	{
 		print_log("died", philo, data);
 		data->dead += 1;
+		return (1);
 	}
+	return (0);
 }
 
 void	philo_life(t_philo *philo, t_data *data)
@@ -71,11 +73,11 @@ void	philo_life(t_philo *philo, t_data *data)
 		pthread_mutex_unlock (&data->forks[philo->left_fork]);
 		pthread_mutex_unlock (&data->forks[philo->right_fork]);
 		philo->eat_count++;
-		dead (data, philo);
-		time_time(data->time_to_sleep);
-		print_log("is sleeping", philo, data);
 		if (data->must_eat == philo->eat_count)
 			break;
+		time_time(data->time_to_sleep);
+		print_log("is sleeping", philo, data);
+		dead (data, philo);
 		print_log("is thinking", philo, data);
 		dead (data, philo);
 	}
@@ -88,8 +90,8 @@ void  *philo_rutine(void *args)
 
 	philo = (t_philo *)args;
 	data  = philo->data;
-	if (philo->id % 2 == 0) // si el id es par duerme antes de comer y viceversa para evitar el deadlock
-		usleep (100);
+	if (philo->id % 2 == 0)
+		time_time(2);
 	philo_life(philo, data);
 	return (NULL);
 }
