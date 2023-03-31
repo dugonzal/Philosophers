@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/31 10:48:00 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/03/31 10:59:45 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ pthread_mutex_destroy -> destruye el mutex
  * si duermen no piensan ni comen  -> funcion de dormir
  *
  */
-
-/* void philo_dead(t_data *data, t_philo *philo)
-{
-
-} */
-
 /*
 si el philo no empieza a comer en x tiempo desde el inicio del programa
 o desde su ultimo bocado, muere
@@ -67,8 +61,8 @@ void	philo_life(t_philo *philo, t_data *data)
 		dead (data, philo);
 		pthread_mutex_lock (&data->forks[philo->right_fork]);
 		print_log("has taken a fork", philo, data);
-		philo->last_eat = get_time();
 		time_time(data->time_to_eat);
+		philo->last_eat = get_time();
 		print_log("is eating", philo, data);
 		pthread_mutex_unlock (&data->forks[philo->left_fork]);
 		pthread_mutex_unlock (&data->forks[philo->right_fork]);
