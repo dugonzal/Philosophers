@@ -43,7 +43,7 @@ o desde su ultimo bocado, muere
 
 int dead(t_data *data, t_philo *philo)
 {
-	if ((get_time() - philo->last_eat) >= data->time_to_die)
+	if (data->dead || (get_time() - philo->last_eat) >= data->time_to_die)
 	{
 		data->dead += 1;
 		print_log("died", philo, data);
@@ -86,10 +86,7 @@ void	philo_life(t_philo *philo, t_data *data)
         break;
 		if (data->must_eat == philo->eat_count)
 			break;
-		if (dead (data, philo))
-      break;
 		print_log("is thinking", philo, data);
-		dead (data, philo);
 	}
 }
 
