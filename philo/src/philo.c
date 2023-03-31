@@ -52,11 +52,9 @@ int dead(t_data *data, t_philo *philo)
 	return (0);
 }
 
-void	philo_life(t_philo *philo, t_data *data)
+void eat_sleep(t_data *data, t_philo *philo)
 {
-	while (!data->dead)
-	{
-		pthread_mutex_lock (&data->forks[philo->left_fork]);
+  	pthread_mutex_lock (&data->forks[philo->left_fork]);
 		print_log("has taken a fork", philo, data);
 		dead (data, philo);
 		pthread_mutex_lock (&data->forks[philo->right_fork]);
@@ -66,12 +64,19 @@ void	philo_life(t_philo *philo, t_data *data)
 		print_log("is eating", philo, data);
 		pthread_mutex_unlock (&data->forks[philo->left_fork]);
 		pthread_mutex_unlock (&data->forks[philo->right_fork]);
+  	time_time(data->time_to_sleep);
+		print_log("is sleeping", philo, data);
 		philo->eat_count++;
+}
+
+void	philo_life(t_philo *philo, t_data *data)
+{
+	while (!data->dead)
+	{
+    eat_sleep(data, philo);
 		if (data->must_eat == philo->eat_count)
 			break;
-		time_time(data->time_to_sleep);
-		print_log("is sleeping", philo, data);
-		dead (data, philo);
+			dead (data, philo);
 		print_log("is thinking", philo, data);
 		dead (data, philo);
 	}
@@ -114,6 +119,16 @@ void 	mutex_destroy(t_data *data)
 	pthread_mutex_destroy (&data->print);
 }
 
+void *philo_dead(void *args)
+{
+  t_philo *philo;
+  t_data *data;
+
+  philo = args;
+  data = philo->data;
+  return (NULL);
+}
+
 void	init_threads(t_data *data)
 {
 	t_philo	*philo;
@@ -127,6 +142,7 @@ void	init_threads(t_data *data)
 	mutex_init (data);
 	data->time = get_time ();
 	i = -1;
+	pthread_create (&data->thread_dead, NULL, &philo_dead, &philo);
 	while (++i < data->philo_num)
 	{
 		philo[i].id = i;
@@ -137,6 +153,7 @@ void	init_threads(t_data *data)
 		pthread_create (&data->thread[i], NULL, &philo_rutine, &philo[i]);
 	}
 	i = -1;
+	pthread_join (data->thread_dead, NULL);
 	while (++i < data->philo_num)
 		pthread_join (data->thread[i], NULL);
 	mutex_destroy (data);

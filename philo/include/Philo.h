@@ -39,6 +39,7 @@ typedef struct s_data
 	int				dead; // aqui guradamos si hay algun filsf muerto
 	long int		time;
 	pthread_t		*thread; // hilo del filosofo
+	pthread_t		thread_dead; // hilo del filosofo
 	pthread_mutex_t	*forks; // array de mutex de los tenedores
 	pthread_mutex_t	print; // mutex para imprimir
 }	t_data;
