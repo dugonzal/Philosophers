@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 17:51:28 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/01 21:24:40 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,6 @@ void		mutex_destroy(t_data *data);
 t_data		*mutex_init(t_data *data);
 void		*philo_rutine(void *args);
 void		check_dead(t_philo *philo);
+int			eat(t_data *data, t_philo *philo);
+int			sleep_philo(t_data *data, t_philo *philo);
 #endif
