@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+         #
+#    By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 23:10:38 by ciclo             #+#    #+#              #
-#    Updated: 2023/03/30 16:54:17 by ciclo            ###   ########.fr        #
+#    Updated: 2023/04/01 09:58:08 by dugonzal         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ R			:= rm -rf
 OBJ_DIR		:= obj/
 SRC_DIR		:= src/
 
-SRC_FILES	:= philo utils utils2 parser
+SRC_FILES	:= philo utils utils2 parser threads mutex
 
 SRC			:= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			:= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/30 18:27:39 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/01 10:00:26 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,35 @@ void	help_msg(void)
 	printf ("Example: ./philosofers 5 800 200 200 [5]\n");
 	exit (EXIT_SUCCESS);
 }
-static int ft_isdigit(int c)
+
+static int	ft_isdigit(int c)
 {
 	return (c < 48 || c > 58);
 }
 
 static void	check_args(char **av)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
 	while (av[i])
 	{
 		j = 0;
 		while (av[i][j])
+		{
 			if (av[i][j] == '+' || av[i][j] == '-')
+			{
 				if (av[i][j + 1] == '+' || av[i][j + 1] == '-')
 					error (RED"Error: -> no es un numero\n"RESET);
 				else
 					break ;
+			}
 			else if (ft_isdigit(av[i][j]))
-					error (RED"Error: -> no es un numero\n"RESET);
+				error (RED"Error: -> no es un numero\n"RESET);
 			else
 				j++;
+		}
 		i++;
 	}
 }
@@ -69,10 +74,9 @@ t_data	*parser(int ac, char **av, t_data *data)
 	(ac > 1 && !ft_strcmp(av[1], "--help")))
 		help_msg();
 	if (ac < 5 || ac > 6)
-		return (free_data(data, RED"Error: -> numero de argumentos invalido\n"RESET));
+		return (free_data(data, RED"Error: -> numero de argumentos \
+		invalido\n"RESET));
 	data->philo_num = ft_atoi(av[1], data);
-	//if (data->philo_num < 2)
-		//return (free_data(data, RED"Error: -> numero de filosofos invalido\n"RESET));
 	data->time_to_die = ft_atoi(av[2], data);
 	data->time_to_eat = ft_atoi(av[3], data);
 	data->time_to_sleep = ft_atoi(av[4], data);

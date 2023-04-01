@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/03/31 12:14:09 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/01 10:54:23 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_data
 //	pthread_t		thread_dead; // hilo del filosofo
 	pthread_mutex_t	*forks; // array de mutex de los tenedores
 	pthread_mutex_t	print; // mutex para imprimir
+	pthread_mutex_t	dead_mutex; // mutex para imprimir
 }	t_data;
 
 typedef struct s_philo
@@ -60,12 +61,15 @@ t_data		*parser(int ac, char **av, t_data *data);
 void		error(char *s);
 int			ft_strlen(char *str);
 int			ft_strcmp(char *s1, char *s2);
-void 		init_threads(t_data *data);
+void		init_threads(t_data *data);
 long int	get_time(void);
 void		clean(t_data *data, t_philo *philo);
 long int	time_diff(long int present, long int past);
 void		time_time(long int time);
 void		print_log(char *str, t_philo *philo, t_data *data);
 void		*free_data(t_data *data, char *s);
+void		mutex_destroy(t_data *data);
+t_data		*mutex_init(t_data *data);
+void		*philo_rutine(void *args);
 
 #endif
