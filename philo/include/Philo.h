@@ -6,7 +6,7 @@
 /*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 10:54:23 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/01 14:00:45 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_data
 	int				dead; // aqui guradamos si hay algun filsf muerto
 	long int		time;
 	pthread_t		*thread; // hilo del filosofo
-//	pthread_t		thread_dead; // hilo del filosofo
+	int				eat_count; // numero de veces que ha comido
 	pthread_mutex_t	*forks; // array de mutex de los tenedores
 	pthread_mutex_t	print; // mutex para imprimir
 	pthread_mutex_t	dead_mutex; // mutex para imprimir
@@ -71,5 +71,5 @@ void		*free_data(t_data *data, char *s);
 void		mutex_destroy(t_data *data);
 t_data		*mutex_init(t_data *data);
 void		*philo_rutine(void *args);
-
+void	check_dead(t_philo *philo);
 #endif

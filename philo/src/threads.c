@@ -6,7 +6,7 @@
 /*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 09:54:38 by dugonzal          #+#    #+#             */
-/*   Updated: 2023/04/01 10:27:51 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/01 12:56:17 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	init_threads(t_data *data)
 	}
 	i = -1;
 	while (++i < data->philo_num)
-		pthread_join (data->thread[i], NULL);
+		pthread_detach (data->thread[i]);
+	check_dead (philo);
 	mutex_destroy (data);
 	clean (data, philo);
 }
