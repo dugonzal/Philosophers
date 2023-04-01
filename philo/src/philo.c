@@ -6,7 +6,7 @@
 /*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 17:55:05 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:57:26 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	*philo_rutine(void *args)
 	return (NULL);
 }
 
+// falta recolectar este archivo a 5 funciones
 int	main(int ac, char **av)
 {
 	t_data	data;
