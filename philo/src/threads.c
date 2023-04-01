@@ -6,11 +6,24 @@
 /*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 09:54:38 by dugonzal          #+#    #+#             */
-/*   Updated: 2023/04/01 12:56:17 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:52:36 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Philo.h"
+
+static void	init(t_data *data, t_philo *philo, int i)
+{
+	while (++i < data->philo_num)
+	{
+		philo[i].id = i;
+		philo[i].left_fork = i;
+		philo[i].right_fork = (i + 1) % data->philo_num;
+		philo[i].data = data;
+		philo[i].last_eat = data->time;
+		pthread_create (&data->thread[i], NULL, &philo_rutine, &philo[i]);
+	}
+}
 
 void	init_threads(t_data *data)
 {
@@ -25,15 +38,7 @@ void	init_threads(t_data *data)
 	mutex_init (data);
 	data->time = get_time ();
 	i = -1;
-	while (++i < data->philo_num)
-	{
-		philo[i].id = i;
-		philo[i].left_fork = i;
-		philo[i].right_fork = (i + 1) % data->philo_num;
-		philo[i].data = data;
-		philo[i].last_eat = data->time;
-		pthread_create (&data->thread[i], NULL, &philo_rutine, &philo[i]);
-	}
+	init (data, philo, i);
 	i = -1;
 	while (++i < data->philo_num)
 		pthread_detach (data->thread[i]);

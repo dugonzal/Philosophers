@@ -6,43 +6,12 @@
 /*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 14:54:45 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:55:05 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Philo.h"
 
-// teseting programing
-// ./filosofers 5 500 300 200 10
-
-/*
-philosofers.c:
-se trata de implementar una solución para el problema de los filósofos que
-intentan comer de un bol de espaguetis necesitan dos tenedores para hacerlo
-y cada filosofo solo tiene uno.
-
-pthread_create -> crea un hilo nuevo para cada filosofo
-pthread_join -> espera a que el hilo termine
-pthread_mutex_init -> inicializa el mutex
-pthread_mutex_lock -> bloquea el mutex
-pthread_mutex_unlock -> desbloquea el mutex
-pthread_mutex_destroy -> destruye el mutex
- * los filósofos solo comen piensan y duermen
- * si comen, no piensan ni duermen -> funcion de comer
- * si piensan no comen ni duermen  -> funcion de pensar
- * si duermen no piensan ni comen  -> funcion de dormir
-si el philo no empieza a comer en x tiempo desde el inicio del programa
-o desde su ultimo bocado, muere
-* si algun filosofo muere, todos los demas deben morir, estoy buscando la forma de implementarlo
-* si todos los filosofos han comido al menos N veces, el programa termina
-* podria dividir comer, pensar y dormir en funciones diferentes y llamarlas en un bucle
-* y en cada iteracion comprobar si algun filosofo ha muerto y si todos han comido N veces
-*/
-
-/// @brief
-/// @param data
-/// @param philo
-/// @return
 int	eat(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock (&data->forks[philo->left_fork]);
@@ -64,10 +33,6 @@ int	eat(t_data *data, t_philo *philo)
 	return (0);
 }
 
-/// @brief
-/// @param data
-/// @param philo
-/// @return
 int	sleep_philo(t_data *data, t_philo *philo)
 {
 	time_time(data->time_to_sleep);

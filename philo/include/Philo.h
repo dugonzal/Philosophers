@@ -6,7 +6,7 @@
 /*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 14:00:45 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/01 17:51:28 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,29 @@
 
 typedef struct s_data
 {
-	int 			philo_num;	// numero de filosofos
-	int 			time_to_die; // tiempo que muere si no come;
-	int 			time_to_eat; // tiempo que come
-	int				time_to_sleep; // tiempo que duerme
-	int				must_eat; // -1 si no se pasa como argumento
-	int				dead; // aqui guradamos si hay algun filsf muerto
+	int				philo_num;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				must_eat;
+	int				dead;
 	long int		time;
-	pthread_t		*thread; // hilo del filosofo
-	int				eat_count; // numero de veces que ha comido
-	pthread_mutex_t	*forks; // array de mutex de los tenedores
-	pthread_mutex_t	print; // mutex para imprimir
-	pthread_mutex_t	dead_mutex; // mutex para imprimir
+	pthread_t		*thread;
+	int				eat_count;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print;
+	pthread_mutex_t	dead_mutex;
 }	t_data;
 
 typedef struct s_philo
 {
-	int				id; // id del filosofo
-	int				left_fork; // id del (tenedor o mutex) izquierdo
-	int				right_fork; // id del (tenedor o mutex) derecho
-	int				eat_count; // numero de veces que ha comido
-	long int		last_eat; // tiempo en el que ha comido
-	int				last_meal_time; // la ultima vez que ha comido
-	struct s_data 	*data; // estructura general del programa
+	int				id;
+	int				left_fork;
+	int				right_fork;
+	int				eat_count;
+	long int		last_eat;
+	int				last_meal_time;
+	struct s_data	*data;
 }	t_philo;
 
 int			ft_atoi(const char *str, t_data *data);
@@ -71,5 +71,5 @@ void		*free_data(t_data *data, char *s);
 void		mutex_destroy(t_data *data);
 t_data		*mutex_init(t_data *data);
 void		*philo_rutine(void *args);
-void	check_dead(t_philo *philo);
+void		check_dead(t_philo *philo);
 #endif
