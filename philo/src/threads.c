@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 09:54:38 by dugonzal          #+#    #+#             */
-/*   Updated: 2023/04/03 22:12:12 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 22:19:15 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,8 @@ void	init_threads(t_data *data)
 	while (++i < data->philo_num)
 		pthread_detach (data->thread[i]);
 	check_dead (philo);
-	clean (data, philo);
+	free (philo);
+	free (data->thread);
+	mutex_destroy (data);
+	//clean (data, philo);
 }

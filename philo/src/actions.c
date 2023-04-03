@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 21:23:47 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 21:24:08 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 22:22:50 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	eat(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock (&data->forks[philo->left_fork]);
 	print_log("has taken a fork", philo, data);
-	if (data->dead)
+	if (data->dead || data->philo_num == 1)
 		return (1);
 	pthread_mutex_lock (&data->forks[philo->right_fork]);
 	print_log("has taken a fork", philo, data);

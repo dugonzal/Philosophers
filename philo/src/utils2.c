@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 14:08:17 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 17:55:43 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/03 22:13:34 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,22 @@
 
 void	clean(t_data *data, t_philo *philo)
 {
-	free (data->thread);
-	free (data->forks);
-	free (data);
-	free (philo);
+	if (data->philo_num == 1)
+	{
+		pthread_mutex_destroy (&data->forks[0]);
+		pthread_mutex_destroy (&data->print);
+	}
+	else
+	{
+		mutex_destroy (data);
+	}
+	if (data->dead)
+	{
+		free (data->thread);
+		free (data->forks);
+		free (data);
+		free (philo);
+	}
 }
 
 long int	time_diff(long int present, long int past)
