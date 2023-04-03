@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 09:12:15 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 10:28:50 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int	main(int ac, char **av)
 	if (!data)
 		error (RED"Error: -> malloc\n"RESET);
 	parser(ac, av, data);
+	init_threads(data);
 	exit (EXIT_SUCCESS);
 }

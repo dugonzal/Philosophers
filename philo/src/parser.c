@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 09:12:05 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 10:28:43 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,5 @@ t_data	*parser(int ac, char **av, t_data *data)
 	data->time_to_sleep = ft_atoi(av[4], data);
 	if (ac == 6)
 		data->must_eat = ft_atoi(av[5], data);
-	init_threads(data);
 	return (data);
 }
