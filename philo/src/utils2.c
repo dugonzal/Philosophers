@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 14:08:17 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 22:13:34 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 22:28:32 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ void	time_time(long int time)
 
 	start = get_time();
 	while (42)
+	{
 		if (time_diff(get_time(), start) >= time)
 			break ;
+		usleep(100);
+	}
 }
 
 void	print_log(char *str, t_philo *philo, t_data *data)

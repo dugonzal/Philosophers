@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 22:11:13 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 22:51:35 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	check_dead(t_philo *philo)
 	}
 	pthread_mutex_unlock(&data->forks[philo->left_fork]);
 	pthread_mutex_unlock(&data->forks[philo->right_fork]);
+	pthread_mutex_destroy(&data->print);
 }
 
 void	philo_life(t_philo *philo, t_data *data)

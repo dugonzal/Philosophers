@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 15:02:23 by dugonzal          #+#    #+#             */
-/*   Updated: 2023/04/03 22:22:07 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 22:27:36 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ void	*philo_rutine(void *args)
 
 	philo = (t_philo *)args;
 	data = philo->data;
-	if (philo->id % 2 != 0)
-		time_time (data->time_to_eat / 10000);
+	if (philo->id % 2 == 0)
+		usleep(1000);
+	//	time_time (data->time_to_eat / 10);
 	philo_life(philo, data);
 	return (NULL);
 }
