@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 09:12:01 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 22:17:55 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void		time_time(long int time);
 void		print_log(char *str, t_philo *philo, t_data *data);
 void		*free_data(t_data *data, char *s);
 void		mutex_destroy(t_data *data);
-t_data		*mutex_init(t_data *data);
+void		mutex_init(t_data *data);
 void		*philo_rutine(void *args);
 void		check_dead(t_philo *philo);
 int			eat(t_data *data, t_philo *philo);
