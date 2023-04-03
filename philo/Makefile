@@ -6,7 +6,7 @@
 #    By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/24 23:10:38 by ciclo             #+#    #+#              #
-#    Updated: 2023/04/01 21:24:51 by ciclo            ###   ########.fr        #
+#    Updated: 2023/04/01 22:51:14 by ciclo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,6 @@ val: all
 		--track-origins=yes \
 		--verbose \
 		--log-file=valgrind-out.txt \
-		./$(NAME) 10 2000 200 200
+		./$(NAME) 4 800 200 200
 
 .PHONY: all clean fclean re asm rm-asm norm

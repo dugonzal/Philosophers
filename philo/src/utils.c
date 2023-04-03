@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:57:44 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 17:54:20 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/03 09:14:31 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int	ft_atoi(const char *str, t_data *data)
 	nbr = 0;
 	while (*str && *str > 47 && *str < 58)
 		nbr = nbr * 10 + *str++ - 48;
-	if (nbr > 2147483647 || nbr < 1)
+	if (nbr < 1 || nbr > 2147483647)
 	{
 		free (data);
-		printf (RED"Error: no puede ser menor 1 o mayor a 2147483647\n"RESET);
+		printf (RED"Error: no puede ser menor a 1, o mayor a 2147483647\n"RESET);
 		exit (EXIT_FAILURE);
 	}
 	return ((int)nbr);

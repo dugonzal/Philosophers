@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 10:00:26 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/03 09:12:05 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_isdigit(int c)
 	return (c < 48 || c > 58);
 }
 
-static void	check_args(char **av)
+void	check_args(char **av)
 {
 	int	i;
 	int	j;
@@ -49,8 +49,7 @@ static void	check_args(char **av)
 			}
 			else if (ft_isdigit(av[i][j]))
 				error (RED"Error: -> no es un numero\n"RESET);
-			else
-				j++;
+			j++;
 		}
 		i++;
 	}
@@ -65,10 +64,6 @@ void	*free_data(t_data *data, char *s)
 
 t_data	*parser(int ac, char **av, t_data *data)
 {
-	check_args (av);
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
-		error (RED"Error: -> malloc\n"RESET);
 	memset (data, 0, sizeof(t_data));
 	if ((ac > 1 && !ft_strcmp(av[1], "-h")) || \
 	(ac > 1 && !ft_strcmp(av[1], "--help")))

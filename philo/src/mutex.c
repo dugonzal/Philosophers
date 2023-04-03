@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 09:56:59 by dugonzal          #+#    #+#             */
-/*   Updated: 2023/04/01 09:57:19 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/01 22:54:32 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,5 @@ void	mutex_destroy(t_data *data)
 	while (++i < data->philo_num)
 		pthread_mutex_destroy (&data->forks[i]);
 	pthread_mutex_destroy (&data->print);
+	pthread_mutex_destroy (&data->dead_mutex);
 }

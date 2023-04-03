@@ -6,13 +6,11 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/01 21:24:03 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 09:12:15 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Philo.h"
-
-
 
 void	check_dead(t_philo *philo)
 {
@@ -38,9 +36,6 @@ void	check_dead(t_philo *philo)
 	pthread_mutex_unlock(&data->forks[philo->right_fork]);
 }
 
-/// @brief
-/// @param philo
-/// @param data
 void	philo_life(t_philo *philo, t_data *data)
 {
 	while (42)
@@ -71,8 +66,12 @@ void	*philo_rutine(void *args)
 // falta recolectar este archivo a 5 funciones
 int	main(int ac, char **av)
 {
-	t_data	data;
+	t_data	*data;
 
-	parser(ac, av, &data);
+	check_args(av);
+	data = (t_data *)malloc(sizeof(t_data));
+	if (!data)
+		error (RED"Error: -> malloc\n"RESET);
+	parser(ac, av, data);
 	exit (EXIT_SUCCESS);
 }
