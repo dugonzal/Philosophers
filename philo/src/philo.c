@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 10:28:50 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 22:11:13 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,10 @@ void	*philo_rutine(void *args)
 // falta recolectar este archivo a 5 funciones
 int	main(int ac, char **av)
 {
-	t_data	*data;
+	t_data	data;
 
 	check_args(av);
-	data = (t_data *)malloc(sizeof(t_data));
-	if (!data)
-		error (RED"Error: -> malloc\n"RESET);
-	parser(ac, av, data);
-	init_threads(data);
+	parser(ac, av, &data);
+	init_threads(&data);
 	exit (EXIT_SUCCESS);
 }
