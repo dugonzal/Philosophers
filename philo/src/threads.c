@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 09:54:38 by dugonzal          #+#    #+#             */
-/*   Updated: 2023/04/03 09:19:26 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/03 10:29:54 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_threads(t_data *data)
 	data->thread = (pthread_t *)malloc(sizeof(pthread_t) * data->philo_num);
 	if (!philo || !data->thread)
 		free_data(data, RED"Error: malloc failed"RESET);
-	memset (philo, 0, sizeof(t_philo));
+	memset (philo, 0, sizeof(t_philo) * data->philo_num);
 	mutex_init (data);
 	data->time = get_time ();
 	i = -1;
