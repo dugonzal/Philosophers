@@ -6,7 +6,7 @@
 /*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/04 20:22:24 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/04 20:26:23 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_philo
 }	t_philo;
 
 int			ft_atoi(const char *str);
-t_data		*parser(int ac, char **av, t_data *data);
+void		parser(int ac, char **av, t_data *data);
 void		error(char *s);
 int			ft_strlen(char *str);
 int			ft_strcmp(char *s1, char *s2);

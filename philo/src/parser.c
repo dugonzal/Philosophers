@@ -6,7 +6,7 @@
 /*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/04 20:25:41 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/04 20:26:12 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_args(char **av)
 	}
 }
 
-t_data	*parser(int ac, char **av, t_data *data)
+void	parser(int ac, char **av, t_data *data)
 {
 	memset (data, 0, sizeof(t_data));
 	if ((ac > 1 && !ft_strcmp(av[1], "-h")) || \
@@ -70,5 +70,4 @@ t_data	*parser(int ac, char **av, t_data *data)
 	data->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		data->must_eat = ft_atoi(av[5]);
-	return (data);
 }
