@@ -6,7 +6,7 @@
 /*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/04 20:22:20 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/04 20:25:41 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,6 @@ void	check_args(char **av)
 	}
 }
 
-void	*free_data(t_data *data, char *s)
-{
-	free (data);
-	error (s);
-	return (NULL);
-}
-
 t_data	*parser(int ac, char **av, t_data *data)
 {
 	memset (data, 0, sizeof(t_data));
@@ -69,8 +62,8 @@ t_data	*parser(int ac, char **av, t_data *data)
 	(ac > 1 && !ft_strcmp(av[1], "--help")))
 		help_msg();
 	if (ac < 5 || ac > 6)
-		return (free_data(data, RED"Error: -> numero de argumentos \
-		invalido\n"RESET));
+		error(RED"Error: -> numero de argumentos \
+		invalido\n"RESET);
 	data->philo_num = ft_atoi(av[1]);
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);

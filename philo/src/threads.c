@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 09:54:38 by dugonzal          #+#    #+#             */
-/*   Updated: 2023/04/03 22:19:15 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/04 20:24:27 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,4 @@ void	init_threads(t_data *data)
 	free (philo);
 	free (data->thread);
 	mutex_destroy (data);
-	//clean (data, philo);
 }
