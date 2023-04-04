@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 10:57:44 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 09:14:31 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/04 20:22:56 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Philo.h"
 
-int	ft_atoi(const char *str, t_data *data)
+int	ft_atoi(const char *str)
 {
 	unsigned long int	nbr;
 
@@ -20,7 +20,6 @@ int	ft_atoi(const char *str, t_data *data)
 		str++;
 	if (*str == 45)
 	{
-		free (data);
 		printf (RED"Error: no puede ser negativo\n"RESET);
 		exit (EXIT_FAILURE);
 	}
@@ -31,7 +30,6 @@ int	ft_atoi(const char *str, t_data *data)
 		nbr = nbr * 10 + *str++ - 48;
 	if (nbr < 1 || nbr > 2147483647)
 	{
-		free (data);
 		printf (RED"Error: no puede ser menor a 1, o mayor a 2147483647\n"RESET);
 		exit (EXIT_FAILURE);
 	}

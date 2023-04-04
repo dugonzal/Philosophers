@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:39 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 22:17:55 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/04 20:22:24 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_philo
 	struct s_data	*data;
 }	t_philo;
 
-int			ft_atoi(const char *str, t_data *data);
+int			ft_atoi(const char *str);
 t_data		*parser(int ac, char **av, t_data *data);
 void		error(char *s);
 int			ft_strlen(char *str);

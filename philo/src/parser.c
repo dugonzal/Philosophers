@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 10:28:43 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/04 20:22:20 by dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ t_data	*parser(int ac, char **av, t_data *data)
 	if (ac < 5 || ac > 6)
 		return (free_data(data, RED"Error: -> numero de argumentos \
 		invalido\n"RESET));
-	data->philo_num = ft_atoi(av[1], data);
-	data->time_to_die = ft_atoi(av[2], data);
-	data->time_to_eat = ft_atoi(av[3], data);
-	data->time_to_sleep = ft_atoi(av[4], data);
+	data->philo_num = ft_atoi(av[1]);
+	data->time_to_die = ft_atoi(av[2]);
+	data->time_to_eat = ft_atoi(av[3]);
+	data->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
-		data->must_eat = ft_atoi(av[5], data);
+		data->must_eat = ft_atoi(av[5]);
 	return (data);
 }
