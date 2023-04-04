@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/03 22:51:35 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/04 11:17:20 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ void	check_dead(t_philo *philo)
 
 void	philo_life(t_philo *philo, t_data *data)
 {
-	while (42)
+	while (!data->dead)
 	{
 		if (eat(data, philo))
 			break ;
 		if (sleep_philo(data, philo))
-			break ;
-		if (data->eat_count == data->philo_num)
 			break ;
 		print_log("is thinking", philo, data);
 	}
@@ -58,8 +56,8 @@ void	*philo_rutine(void *args)
 
 	philo = (t_philo *)args;
 	data = philo->data;
-	if (philo->id % 2 == 0)
-		usleep(1000);
+	if (philo->id % 2 != 0)
+		time_time(data->time_to_die / 10);
 	philo_life(philo, data);
 	return (NULL);
 }
