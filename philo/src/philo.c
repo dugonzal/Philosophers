@@ -6,7 +6,7 @@
 /*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 23:15:01 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/04 11:17:20 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/04 11:25:35 by ciclo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	check_dead(t_philo *philo)
 
 void	philo_life(t_philo *philo, t_data *data)
 {
-	while (!data->dead)
+	while (42)
 	{
 		if (eat(data, philo))
 			break ;
@@ -62,7 +62,6 @@ void	*philo_rutine(void *args)
 	return (NULL);
 }
 
-// falta recolectar este archivo a 5 funciones
 int	main(int ac, char **av)
 {
 	t_data	data;
