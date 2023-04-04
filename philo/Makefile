@@ -12,7 +12,7 @@
 
 NAME		:= philo
 
-CC			:= clang -g3
+CC			:= clang -g3 -fsanitize=address
 FLAGS		:= -Wall -Werror -Wextra
 R			:= rm -rf
 
