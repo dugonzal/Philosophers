@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ciclo <ciclo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 15:02:23 by dugonzal          #+#    #+#             */
-/*   Updated: 2023/04/03 22:27:36 by ciclo            ###   ########.fr       */
+/*   Updated: 2023/04/17 16:16:36 by Dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	philo_life(t_philo *philo, t_data *data)
 		if (eat(data, philo))
 			break ;
 		if (sleep_philo(data, philo))
-			break ;
-		if (data->eat_count == data->philo_num)
 			break ;
 		print_log("is thinking", philo, data);
 	}
