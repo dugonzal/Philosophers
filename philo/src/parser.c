@@ -6,7 +6,7 @@
 /*   By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/17 16:07:41 by Dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:11:43 by Dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,9 @@ void	check_args(char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if (av[i][0] == '+' || av[i][0] == '-')	  
-			{
+			if (av[i][0] == '+' || av[i][0] == '-')
 			  j++;
-			  continue;
-			}
-			else if (ft_isdigit(av[i][j]))
+			if (ft_isdigit(av[i][j]))
 				error (RED"Error: -> no es un numero\n"RESET);
 			j++;
 		}
@@ -56,8 +53,8 @@ void	check_args(char **av)
 void	parser(int ac, char **av, t_data *data)
 {
 	memset (data, 0, sizeof(t_data));
-	if ((ac > 1 && !ft_strcmp(av[1], "-h")) || \
-	(ac > 1 && !ft_strcmp(av[1], "--help")))
+	if ((ac > 1 && !ft_strcmp(av[1], "-h")) \
+	|| (ac > 1 && !ft_strcmp(av[1], "--help")))
 		help_msg();
 	if (ac < 5 || ac > 6)
 		error(RED"Error: -> numero de argumentos \
