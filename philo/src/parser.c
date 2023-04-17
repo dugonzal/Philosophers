@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dugonzal <dugonzal@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dugonzal <dugonzal@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:26:50 by ciclo             #+#    #+#             */
-/*   Updated: 2023/04/04 20:26:57 by dugonzal         ###   ########.fr       */
+/*   Updated: 2023/04/17 16:07:41 by Dugonzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,10 @@ void	check_args(char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if (av[i][j] == '+' || av[i][j] == '-')
+			if (av[i][0] == '+' || av[i][0] == '-')	  
 			{
-				if (av[i][j + 1] == '+' || av[i][j + 1] == '-')
-					error (RED"Error: -> no es un numero\n"RESET);
-				else
-					break ;
+			  j++;
+			  continue;
 			}
 			else if (ft_isdigit(av[i][j]))
 				error (RED"Error: -> no es un numero\n"RESET);
